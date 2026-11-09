@@ -1457,7 +1457,7 @@ SEMED · PPP
 </div>
 </div>
 <div><label for="layer-filter">Categoria da feição</label><select id="layer-filter"><option value="">Todas</option></select></div>
-<div><label for="base">Base de mapas</label><select id="base"><option value="satellite">Satélite Esri</option><option value="streets">Ruas Esri</option><option value="topo">Topográfico Esri</option><option value="none">Somente vetores</option></select></div>
+<div><label for="base">Base de mapas</label><select id="base"><option value="satellite">Satélite Esri</option><option value="hybrid">Satélite híbrido Esri</option><option value="streets">Ruas Esri</option><option value="topo">Topográfico Esri</option><option value="none">Somente vetores</option></select></div>
 </form>
 </header>
 <main class="map-area" aria-label="Mapa e camadas">
@@ -1560,10 +1560,17 @@ const bases = {
   topo: esri("World_Topo_Map",'Fontes: <a href="https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer">Esri</a>, HERE, Garmin, USGS, OpenStreetMap e comunidade GIS',19),
   satellite: esri("World_Imagery",'Imagem: <a href="https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer">Esri</a>, Vantor, Earthstar Geographics e comunidade GIS',19)
 };
+const roadLabels = esri("Reference/World_Transportation",
+  'Vias: <a href="https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer">Esri, HERE, Garmin e OpenStreetMap</a>',19
+).setZIndex(2);
+const hybrid = L.layerGroup([bases.satellite,roadLabels]);
+const tiles = [...Object.values(bases),roadLabels];
+bases.hybrid = hybrid;
 let currentBase;
-for (const base of Object.values(bases)) {
-  base.on("tileerror", () => { if (base === currentBase) byId("map-error").hidden = false; });
-  base.on("loading", () => { if (base === currentBase) byId("map-error").hidden = true; });
+const baseIsActive = base => currentBase === base || (currentBase === hybrid && hybrid.hasLayer(base));
+for (const base of tiles) {
+  base.on("tileerror", () => { if (baseIsActive(base)) byId("map-error").hidden = false; });
+  base.on("loading", () => { if (baseIsActive(base)) byId("map-error").hidden = true; });
 }
 function changeBase() {
   if (currentBase) currentBase.remove();
