@@ -1372,6 +1372,17 @@ button.secondary:hover,button.result:hover{background:#eaf1f5}
 .measurement-path{filter:drop-shadow(0 0 1.5px #183743)}
 .district-boundary{filter:drop-shadow(0 0 1px #2d490b)}
 .development-credit{font-weight:700}
+.point-pulse{
+  transform-box:fill-box;transform-origin:center;pointer-events:none;
+  animation:point-pulse 3s ease-out infinite
+}
+.point-pulse:nth-of-type(3n+2){animation-delay:-1s}
+.point-pulse:nth-of-type(3n){animation-delay:-2s}
+@keyframes point-pulse{
+  0%{opacity:.55;transform:scale(.95)}
+  65%,100%{opacity:0;transform:scale(2.05)}
+}
+@media(prefers-reduced-motion:reduce){.point-pulse{display:none;animation:none}}
 #map .leaflet-control-attribution{max-width:calc(100vw - 70px)}
 
 .map-tools summary{display:flex;align-items:center;justify-content:center;cursor:pointer;list-style:none;border:1px solid #aebfc9;border-radius:6px;background:#fff;color:var(--ink);font-weight:700;font-size:.85rem;padding:.38rem .65rem}
@@ -1625,6 +1636,9 @@ byId("base").addEventListener("change", changeBase);
 const group = {};
 const shapes = new Map();
 const locatorDots = new Map();
+const pointPulses = new Map();
+map.createPane("point-pulses").style.zIndex = 420;
+const pulseLayer = L.layerGroup().addTo(map);
 const toggles = {};
 const selectedOutline = L.geoJSON(null,{pane:"selection",interactive:false,
   style:{color:"#e9a51d",weight:5,fillOpacity:.12},
@@ -1699,6 +1713,12 @@ for (const feature of features) {
     marker.bindTooltip(tooltip.cloneNode(true),local ? {permanent:true,direction,className:"lot-label",opacity:1} : {});
     locatorDots.set(feature.id,marker);
   }
+  if (local || feature.geometry.type === "Point") {
+    pointPulses.set(feature.id,L.circleMarker(p.center,{
+      pane:"point-pulses",interactive:false,className:"point-pulse",
+      radius:8,color:"#fff",weight:1.8,fill:false
+    }));
+  }
   p.searchText = normalize([p.title,config.label,...p.districts,...Object.values(p.fields)].join(" "));
   p.searchCodes = p.codes.map(code => String(code).replace(/\D/g,"")).filter(Boolean);
 }
@@ -1719,12 +1739,15 @@ function visibleResults() {
 function updateMap() {
   const filtered = search.value.trim() || layerFilter.value || districtFilter.value;
   for (const vectorGroup of Object.values(group)) vectorGroup.clearLayers();
+  pulseLayer.clearLayers();
   const matches = new Set(visibleResults().map(f => f.id));
   for (const feature of features) {
     const key = feature.properties.layer;
     if (!toggles[key].checked || (filtered && key !== "Bairros" && !matches.has(feature.id))) continue;
     if (key === "Bairros" && layerFilter.value === key && !matches.has(feature.id)) continue;
     group[key].addLayer(shapes.get(feature.id));
+    const pulse = pointPulses.get(feature.id);
+    if (pulse) pulseLayer.addLayer(pulse);
     const dot = locatorDots.get(feature.id);
     if (dot && (key === "Locais" || map.getZoom() < 17)) group[key].addLayer(dot);
   }
