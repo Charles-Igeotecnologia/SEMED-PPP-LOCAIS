@@ -1457,7 +1457,7 @@ SEMED · PPP
 </div>
 </div>
 <div><label for="layer-filter">Categoria da feição</label><select id="layer-filter"><option value="">Todas</option></select></div>
-<div><label for="base">Base de mapas</label><select id="base"><option value="satellite">Satélite Esri</option><option value="hybrid">Satélite híbrido Esri</option><option value="streets">Ruas Esri</option><option value="topo">Topográfico Esri</option><option value="none">Somente vetores</option></select></div>
+<div><label for="base">Base de mapas</label><select id="base"><option value="satellite">Satélite Esri</option><option value="hybrid">Satélite híbrido · Logradouros</option><option value="streets">Ruas Esri</option><option value="topo">Topográfico Esri</option><option value="none">Somente vetores</option></select></div>
 </form>
 </header>
 <main class="map-area" aria-label="Mapa e camadas">
@@ -1560,23 +1560,64 @@ const bases = {
   topo: esri("World_Topo_Map",'Fontes: <a href="https://services.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer">Esri</a>, HERE, Garmin, USGS, OpenStreetMap e comunidade GIS',19),
   satellite: esri("World_Imagery",'Imagem: <a href="https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer">Esri</a>, Vantor, Earthstar Geographics e comunidade GIS',19)
 };
-const roadLabels = esri("Reference/World_Transportation",
-  'Vias: <a href="https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer">Esri, HERE, Garmin e OpenStreetMap</a>',19
+const rasterRoadLabels = esri("Reference/World_Transportation",
+  'Vias: <a href="https://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Transportation/MapServer">Esri, HERE, Garmin e OpenStreetMap</a>',17
 ).setZIndex(2);
-const hybrid = L.layerGroup([bases.satellite,roadLabels]);
-const tiles = [...Object.values(bases),roadLabels];
+const hybrid = L.layerGroup([bases.satellite,rasterRoadLabels]);
+const tiles = [...Object.values(bases),rasterRoadLabels];
 bases.hybrid = hybrid;
-let currentBase;
+const labelPane = map.createPane("street-labels");
+labelPane.style.zIndex = 210;
+labelPane.style.pointerEvents = "none";
+let currentBase, vectorLabelsPromise;
 const baseIsActive = base => currentBase === base || (currentBase === hybrid && hybrid.hasLayer(base));
 for (const base of tiles) {
   base.on("tileerror", () => { if (baseIsActive(base)) byId("map-error").hidden = false; });
   base.on("loading", () => { if (baseIsActive(base)) byId("map-error").hidden = true; });
+}
+function loadScript(src,integrity) {
+  return new Promise((resolve,reject) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.integrity = integrity;
+    script.crossOrigin = "anonymous";
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.append(script);
+  });
+}
+async function loadVectorLabels() {
+  const context = document.createElement("canvas").getContext("webgl2");
+  if (!context) return null;
+  context.getExtension("WEBGL_lose_context")?.loseContext();
+  if (!L.esri) await loadScript("https://unpkg.com/esri-leaflet@3.0.19/dist/esri-leaflet.js",
+    "sha384-2EpnechKmjshAhcJgZr0/dexkJdbcRJm+qsQtCjFsfBP/u5HZmrSa9lpmD7u2t5T");
+  if (!L.esri.Vector) await loadScript("https://unpkg.com/esri-leaflet-vector@4.3.2/dist/esri-leaflet-vector.js",
+    "sha384-mHZ6EpQireK/7bmjGMfM/OwDdnR9QSQY0o6HKLzCjiekUEgSuaEr03W+1G7FFn31");
+  const labels = L.esri.Vector.vectorTileLayer("2a2e806e6e654ea78ecb705149ceae9f",{
+    pane:"street-labels",
+    attribution:'Logradouros: <a href="https://www.arcgis.com/home/item.html?id=2a2e806e6e654ea78ecb705149ceae9f">Esri e colaboradores</a>'
+  });
+  return new Promise((resolve,reject) => {
+    labels.once("ready",() => resolve(labels));
+    labels.once("load-error",reject);
+  });
 }
 function changeBase() {
   if (currentBase) currentBase.remove();
   byId("map-error").hidden = true;
   currentBase = bases[byId("base").value];
   if (currentBase) currentBase.addTo(map);
+  if (currentBase !== hybrid) return;
+  vectorLabelsPromise ??= loadVectorLabels().catch(() => {
+    vectorLabelsPromise = undefined;
+    return null;
+  });
+  vectorLabelsPromise.then(labels => {
+    if (!labels || currentBase !== hybrid || hybrid.hasLayer(labels)) return;
+    hybrid.addLayer(labels);
+    hybrid.removeLayer(rasterRoadLabels);
+  });
 }
 byId("base").addEventListener("change", changeBase);
 const group = {};
