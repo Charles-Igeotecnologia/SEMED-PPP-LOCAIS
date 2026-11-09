@@ -1371,6 +1371,8 @@ button.secondary:hover,button.result:hover{background:#eaf1f5}
 #map.is-measuring,#map.is-measuring .leaflet-interactive{cursor:crosshair}
 .measurement-path{filter:drop-shadow(0 0 1.5px #183743)}
 .district-boundary{filter:drop-shadow(0 0 1px #2d490b)}
+.development-credit{font-weight:700}
+#map .leaflet-control-attribution{max-width:calc(100vw - 70px)}
 
 .map-tools summary{display:flex;align-items:center;justify-content:center;cursor:pointer;list-style:none;border:1px solid #aebfc9;border-radius:6px;background:#fff;color:var(--ink);font-weight:700;font-size:.85rem;padding:.38rem .65rem}
 .map-tools summary::-webkit-details-marker{display:none}
@@ -1549,7 +1551,7 @@ const layers = {
 const map = L.map("map", {maxZoom:21, zoomControl:false});
 L.control.zoom({position:"topleft",zoomInTitle:"Aproximar",zoomOutTitle:"Afastar"}).addTo(map);
 L.control.scale({imperial:false,position:"bottomleft"}).addTo(map);
-map.attributionControl.setPrefix(false);
+map.attributionControl.setPrefix('<span class="development-credit">Desenvolvimento Geotecnologia: Charles Silva de Araújo</span>');
 map.attributionControl.addAttribution("Dados: LOCALIZACAO.gdb");
 const esri = (service,attribution,maxNativeZoom) => L.tileLayer(
   "https://services.arcgisonline.com/ArcGIS/rest/services/" + service + "/MapServer/tile/{z}/{y}/{x}",
