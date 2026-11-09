@@ -1370,6 +1370,7 @@ button.secondary:hover,button.result:hover{background:#eaf1f5}
 #measure-value:empty{display:none}
 #map.is-measuring,#map.is-measuring .leaflet-interactive{cursor:crosshair}
 .measurement-path{filter:drop-shadow(0 0 1.5px #183743)}
+.district-boundary{filter:drop-shadow(0 0 1px #2d490b)}
 
 .map-tools summary{display:flex;align-items:center;justify-content:center;cursor:pointer;list-style:none;border:1px solid #aebfc9;border-radius:6px;background:#fff;color:var(--ink);font-weight:700;font-size:.85rem;padding:.38rem .65rem}
 .map-tools summary::-webkit-details-marker{display:none}
@@ -1543,7 +1544,7 @@ const layers = {
   Locais: {label:"Locais", singular:"Local", color:"#ac480f", pane:430},
   Escolas: {label:"Escolas", singular:"Escola", color:"#075d9b", pane:450},
   Escolas_Lotes: {label:"Lotes escolares", singular:"Lote escolar", color:"#6c389c", pane:440},
-  Bairros: {label:"Bairros", singular:"Bairro", color:"#517a68", pane:410}
+  Bairros: {label:"Bairros", singular:"Bairro", color:"#adf044", pane:410}
 };
 const map = L.map("map", {maxZoom:21, zoomControl:false});
 L.control.zoom({position:"topleft",zoomInTitle:"Aproximar",zoomOutTitle:"Afastar"}).addTo(map);
@@ -1624,7 +1625,9 @@ for (const feature of features) {
   const boundary = p.layer === "Bairros";
   const local = p.layer === "Locais";
   const shape = L.geoJSON(feature,{pane:p.layer,
-    style:{color:config.color,weight:boundary?1.3:2.4,fillOpacity:boundary?.065:.23,dashArray:boundary?"4 4":null},
+    style: boundary
+      ? {color:config.color,weight:2,opacity:.95,fillColor:"#82dc24",fillOpacity:.17,className:"district-boundary"}
+      : {color:config.color,weight:2.4,fillOpacity:.23},
     pointToLayer:(_,latlng) => L.circleMarker(latlng,{pane:p.layer,radius:6,color:"#fff",weight:1.5,fillColor:config.color,fillOpacity:1})
   });
   shape.on("click",event => {
