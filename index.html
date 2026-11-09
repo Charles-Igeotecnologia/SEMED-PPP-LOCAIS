@@ -1378,15 +1378,10 @@ button.secondary:hover,button.result:hover{background:#eaf1f5}
 #detail h2{font-size:1rem;margin:.35rem 0 .5rem}
 .maps-link{
   display:inline-flex;align-items:center;min-height:38px;margin:0 0 .65rem;padding:.35rem .65rem;
-  border:1px solid #aebfc9;border-radius:6px;background:#fff;color:#075a75;
+  border:1px solid var(--ink);border-radius:6px;background:var(--ink);color:#fff;
   font-size:.85rem;font-weight:700;text-underline-offset:2px
 }
-.maps-link:hover{background:#eaf1f5}
-.maps-actions{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:.65rem}
-.maps-actions .maps-link{margin:0}
-.maps-link.maps-pin{background:var(--ink);color:#fff;border-color:var(--ink)}
-.maps-link.maps-pin:hover{background:#214e61}
-.detail-top{display:flex;justify-content:space-between;align-items:center;gap:.45rem}
+.maps-link:hover{background:#214e61}
 dl{font-size:.83rem;display:grid;grid-template-columns:auto 1fr;gap:.3rem .6rem;margin:0}
 dt{color:var(--muted)}dd{margin:0;overflow-wrap:anywhere}
 .leaflet-tooltip{font-weight:650}
@@ -1683,26 +1678,15 @@ function selectFeature(feature, zoom, clicked) {
     fields.append(term,description);
   }
   const mapsLink = document.createElement("a");
-  const mapsUrl = new URL("https://www.google.com/maps/@");
-  mapsUrl.search = new URLSearchParams({
-    api:"1",map_action:"map",center:location,
-    zoom:p.layer === "Bairros" ? "14" : "19",basemap:"satellite"
-  });
+  const altitude = p.layer === "Bairros" ? 5000 : 250;
+  // Google Maps uses 1e3 in its shared place URLs to open the satellite layer.
+  mapsLink.href = "https://www.google.com/maps/place/" + location +
+    "/@" + location + "," + altitude + "m/data=!3m1!1e3";
   mapsLink.className = "maps-link";
-  mapsLink.href = mapsUrl.href;
   mapsLink.target = "_blank";
   mapsLink.rel = "noopener";
-  mapsLink.textContent = "Abrir no Google Maps · Satélite";
-  const pinUrl = new URL("https://www.google.com/maps/search/");
-  pinUrl.search = new URLSearchParams({api:"1",query:location});
-  const pinLink = mapsLink.cloneNode(false);
-  pinLink.classList.add("maps-pin");
-  pinLink.href = pinUrl.href;
-  pinLink.textContent = "Ver pino no Google Maps";
-  const links = document.createElement("div");
-  links.className = "maps-actions";
-  links.append(pinLink,mapsLink);
-  detail.replaceChildren(top,heading,links,fields);
+  mapsLink.textContent = "Abrir no Google Maps satélite";
+  detail.replaceChildren(top,heading,mapsLink,fields);
   detail.hidden = false;
   panel.hidden = false;
   detail.scrollTop = 0;
