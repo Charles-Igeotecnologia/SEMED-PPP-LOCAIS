@@ -1359,6 +1359,18 @@ button.secondary:hover,button.result:hover{background:#eaf1f5}
 .map-tools{position:absolute;top:10px;right:10px;z-index:460;display:flex;flex-wrap:wrap;align-items:start;justify-content:end;gap:6px;max-width:calc(100% - 62px)}
 .map-tools button,.map-tools summary{min-height:33px;box-shadow:0 1px 4px #0003}
 .map-tools details{position:relative}
+#measure{position:static}
+.measure-box{width:min(273px,79vw)}
+.measure-modes,.measure-actions{display:flex;flex-wrap:wrap;gap:5px}
+.measure-box button{box-shadow:none}
+.measure-modes button[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.measure-box button:disabled{opacity:.5;cursor:default}
+#measure-status{font-size:.83rem;line-height:1.35;margin:8px 0 5px;color:var(--muted)}
+#measure-value{display:block;font-size:1.08rem;font-weight:750;margin-bottom:8px;color:var(--ink)}
+#measure-value:empty{display:none}
+#map.is-measuring,#map.is-measuring .leaflet-interactive{cursor:crosshair}
+.measurement-path{filter:drop-shadow(0 0 1.5px #183743)}
+
 .map-tools summary{display:flex;align-items:center;justify-content:center;cursor:pointer;list-style:none;border:1px solid #aebfc9;border-radius:6px;background:#fff;color:var(--ink);font-weight:700;font-size:.85rem;padding:.38rem .65rem}
 .map-tools summary::-webkit-details-marker{display:none}
 .layer-box{position:absolute;right:0;top:calc(100% + 5px);width:min(230px,75vw);background:#fff;border:1px solid var(--line);border-radius:7px;padding:10px;box-shadow:0 2px 8px #0003}
@@ -1450,6 +1462,24 @@ SEMED · PPP
 <main class="map-area" aria-label="Mapa e camadas">
 <div id="map" aria-label="Mapa interativo de Manaus"></div>
 <div class="map-tools">
+<details id="measure">
+<summary>Medir</summary>
+<div class="layer-box measure-box">
+<div class="measure-modes" role="group" aria-label="Tipo de medição">
+<button id="measure-distance" type="button" class="secondary" aria-pressed="false">Distância</button>
+<button id="measure-area" type="button" class="secondary" aria-pressed="false">Área</button>
+</div>
+<div role="status">
+<p id="measure-status"></p><output id="measure-value"></output>
+</div>
+<div class="measure-actions">
+<button id="measure-undo" type="button" class="secondary">Desfazer</button>
+<button id="measure-finish" type="button" class="primary">Concluir</button>
+<button id="measure-clear" type="button" class="secondary">Limpar</button>
+</div>
+</div>
+</details>
+
 <button id="overview" type="button" class="secondary">Vista geral</button>
 <details id="options">
 <summary>Camadas e filtros</summary>
@@ -1598,6 +1628,7 @@ for (const feature of features) {
     pointToLayer:(_,latlng) => L.circleMarker(latlng,{pane:p.layer,radius:6,color:"#fff",weight:1.5,fillColor:config.color,fillOpacity:1})
   });
   shape.on("click",event => {
+    if (measurement.active) return;
     const clicked = feature.geometry.type === "Point" ? null : event.latlng;
     selectFeature(feature,true,clicked);
   });
@@ -1608,7 +1639,9 @@ for (const feature of features) {
   if (!boundary) overviewBounds.extend(shape.getBounds());
   if (local || p.layer === "Escolas_Lotes") {
     const marker = L.circleMarker(p.center,{pane:p.layer,radius:local?6:4,color:"#fff",weight:1.4,fillColor:config.color,fillOpacity:1});
-    marker.on("click", () => selectFeature(feature,true));
+    marker.on("click",() => {
+      if (!measurement.active) selectFeature(feature,true);
+    });
     const direction = lotLabelDirections[p.title] || "top";
     marker.bindTooltip(tooltip.cloneNode(true),local ? {permanent:true,direction,className:"lot-label",opacity:1} : {});
     locatorDots.set(feature.id,marker);
@@ -1794,6 +1827,129 @@ byId("overview").addEventListener("click",() => {
   closePanel();
   overview();
 });
+
+const measurePanel = byId("measure");
+const measureStatus = byId("measure-status");
+const measureValue = byId("measure-value");
+const measureUndo = byId("measure-undo");
+const measureFinish = byId("measure-finish");
+const measureClear = byId("measure-clear");
+const measurement = {mode:null,active:false,points:[]};
+map.createPane("measurement").style.zIndex = 470;
+const measurementLayer = L.layerGroup().addTo(map);
+const measureStyle = {pane:"measurement",interactive:false,color:"#18d9f0",weight:4,className:"measurement-path"};
+const number = new Intl.NumberFormat("pt-BR",{maximumFractionDigits:2});
+
+function sphericalArea(points) {
+  const radians = Math.PI / 180;
+  const vectors = points.map(({lat,lng}) => {
+    const phi = lat * radians, lambda = lng * radians;
+    return [Math.cos(phi)*Math.cos(lambda),Math.cos(phi)*Math.sin(lambda),Math.sin(phi)];
+  });
+  const dot = (a,b) => a[0]*b[0] + a[1]*b[1] + a[2]*b[2];
+  const a = vectors[0];
+  let angle = 0;
+  // Signed spherical excess of the triangles formed from the first vertex.
+  for (let i = 1; i < vectors.length - 1; i++) {
+    const b = vectors[i], c = vectors[i+1];
+    const cross = [b[1]*c[2]-b[2]*c[1],b[2]*c[0]-b[0]*c[2],b[0]*c[1]-b[1]*c[0]];
+    angle += 2 * Math.atan2(dot(a,cross),1 + dot(a,b) + dot(b,c) + dot(c,a));
+  }
+  return Math.abs(angle) * L.CRS.Earth.R ** 2;
+}
+function crossesItself(points) {
+  const turn = (a,b,c) => Math.sign((b.lng-a.lng)*(c.lat-a.lat)-(b.lat-a.lat)*(c.lng-a.lng));
+  const overlaps = (a,b,c,d,key) =>
+    Math.max(Math.min(a[key],b[key]),Math.min(c[key],d[key])) <= Math.min(Math.max(a[key],b[key]),Math.max(c[key],d[key]));
+  for (let i = 0; i < points.length - 2; i++) {
+    const a = points[i], b = points[i+1];
+    for (let j = i + 2; j < points.length; j++) {
+      if (i === 0 && j === points.length - 1) continue;
+      const c = points[j], d = points[(j+1)%points.length];
+      if (overlaps(a,b,c,d,"lat") && overlaps(a,b,c,d,"lng") &&
+          turn(a,b,c)*turn(a,b,d) <= 0 && turn(c,d,a)*turn(c,d,b) <= 0) return true;
+    }
+  }
+  return false;
+}
+function drawMeasurement() {
+  const {mode,active,points} = measurement;
+  const area = mode === "area";
+  const ready = points.length >= (area ? 3 : 2);
+  const crossed = area && ready && crossesItself(points);
+  measurementLayer.clearLayers();
+  if (points.length >= 2) {
+    const path = area && ready ? L.polygon(points,{...measureStyle,fillOpacity:.22}) : L.polyline(points,measureStyle);
+    path.addTo(measurementLayer);
+  }
+  for (const point of points) {
+    L.circleMarker(point,{...measureStyle,radius:4,color:"#153544",weight:1.5,fillColor:"#18d9f0",fillOpacity:1}).addTo(measurementLayer);
+  }
+  measureUndo.disabled = !active || points.length === 0;
+  measureFinish.disabled = !active || !ready || crossed;
+  measureClear.disabled = !mode;
+  byId("measure-distance").setAttribute("aria-pressed",String(mode === "distance"));
+  byId("measure-area").setAttribute("aria-pressed",String(area));
+  measurePanel.querySelector("summary").textContent = active ? "Medir · ativo" : "Medir";
+  map.getContainer().classList.toggle("is-measuring",active);
+  measureValue.textContent = "";
+  if (!mode) {
+    measureStatus.textContent = "Escolha distância ou área.";
+  } else if (crossed) {
+    measureStatus.textContent = "O contorno se cruza. Desfaça um ponto.";
+  } else {
+    measureStatus.textContent = active
+      ? (area ? "Toque ou clique no contorno, em ordem, e conclua." : "Toque ou clique ao longo do trajeto e conclua.")
+      : (area ? "Área medida" : "Distância medida");
+    if (ready && area) {
+      const squareMeters = sphericalArea(points);
+      measureValue.textContent = number.format(squareMeters) + " m²" +
+        (squareMeters >= 10000 ? " · " + number.format(squareMeters / 10000) + " ha" : "");
+    } else if (ready) {
+      const meters = points.slice(1).reduce((sum,p,i) => sum + map.distance(points[i],p),0);
+      measureValue.textContent = meters >= 1000 ? number.format(meters / 1000) + " km" : number.format(meters) + " m";
+    }
+  }
+}
+function startMeasurement(mode) {
+  closePanel();
+  byId("options").open = false;
+  measurement.mode = mode;
+  measurement.active = true;
+  measurement.points = [];
+  map.doubleClickZoom.disable();
+  drawMeasurement();
+}
+function stopMeasurement(clear) {
+  measurement.active = false;
+  if (clear) {
+    measurement.mode = null;
+    measurement.points = [];
+  }
+  map.doubleClickZoom.enable();
+  drawMeasurement();
+}
+map.on("click",event => {
+  if (!measurement.active || measurement.points.at(-1)?.equals(event.latlng)) return;
+  measurement.points.push(event.latlng);
+  drawMeasurement();
+});
+byId("measure-distance").addEventListener("click",() => startMeasurement("distance"));
+byId("measure-area").addEventListener("click",() => startMeasurement("area"));
+measureUndo.addEventListener("click",() => {
+  measurement.points.pop();
+  drawMeasurement();
+});
+measureFinish.addEventListener("click",() => stopMeasurement(false));
+measureClear.addEventListener("click",() => stopMeasurement(true));
+measurePanel.addEventListener("toggle",() => {
+  if (measurePanel.open) byId("options").open = false;
+});
+byId("options").addEventListener("toggle",() => {
+  if (byId("options").open) measurePanel.open = false;
+});
+drawMeasurement();
+
 map.on("zoomend",updateMap);
 overview();
 changeBase();
