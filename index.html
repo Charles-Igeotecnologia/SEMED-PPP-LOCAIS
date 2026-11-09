@@ -1382,6 +1382,10 @@ button.secondary:hover,button.result:hover{background:#eaf1f5}
   font-size:.85rem;font-weight:700;text-underline-offset:2px
 }
 .maps-link:hover{background:#eaf1f5}
+.maps-actions{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:.65rem}
+.maps-actions .maps-link{margin:0}
+.maps-link.maps-pin{background:var(--ink);color:#fff;border-color:var(--ink)}
+.maps-link.maps-pin:hover{background:#214e61}
 .detail-top{display:flex;justify-content:space-between;align-items:center;gap:.45rem}
 dl{font-size:.83rem;display:grid;grid-template-columns:auto 1fr;gap:.3rem .6rem;margin:0}
 dt{color:var(--muted)}dd{margin:0;overflow-wrap:anywhere}
@@ -1583,7 +1587,10 @@ for (const feature of features) {
     style:{color:config.color,weight:boundary?1.3:2.4,fillOpacity:boundary?.065:.23,dashArray:boundary?"4 4":null},
     pointToLayer:(_,latlng) => L.circleMarker(latlng,{pane:p.layer,radius:6,color:"#fff",weight:1.5,fillColor:config.color,fillOpacity:1})
   });
-  shape.on("click",() => selectFeature(feature,true));
+  shape.on("click",event => {
+    const clicked = feature.geometry.type === "Point" ? null : event.latlng;
+    selectFeature(feature,true,clicked);
+  });
   const tooltip = document.createElement("span");
   tooltip.textContent = p.title;
   if (!local) shape.bindTooltip(tooltip,{sticky:true});
@@ -1636,7 +1643,7 @@ function clearSelection() {
   panel.hidden = results.hidden;
   syncSelectionButtons();
 }
-function selectFeature(feature, zoom) {
+function selectFeature(feature, zoom, clicked) {
   selected = feature;
   const p = feature.properties;
   if (!toggles[p.layer].checked) {
@@ -1644,6 +1651,7 @@ function selectFeature(feature, zoom) {
     updateMap();
   }
   selectedOutline.clearLayers().addData(feature);
+  if (clicked) selectedOutline.addData({type:"Point",coordinates:[clicked.lng,clicked.lat]});
   const detail = byId("detail");
   const top = document.createElement("div");
   top.className = "detail-top";
@@ -1664,7 +1672,9 @@ function selectFeature(feature, zoom) {
   const fields = document.createElement("dl");
   const pairs = Object.entries(p.fields);
   if (p.layer !== "Bairros" && p.districts.length) pairs.push(["Bairro no mapa",p.districts.join(", ")]);
-  const [latitude,longitude] = p.center.map(value => value.toFixed(6));
+  const coordinates = clicked ? [clicked.lat,clicked.lng] : p.center;
+  const [latitude,longitude] = coordinates.map(value => value.toFixed(6));
+  const location = [latitude,longitude].join(",");
   pairs.push(["Latitude",latitude],["Longitude",longitude]);
   for (const [key,value] of pairs) {
     const term = document.createElement("dt"), description = document.createElement("dd");
@@ -1675,7 +1685,7 @@ function selectFeature(feature, zoom) {
   const mapsLink = document.createElement("a");
   const mapsUrl = new URL("https://www.google.com/maps/@");
   mapsUrl.search = new URLSearchParams({
-    api:"1",map_action:"map",center:[latitude,longitude].join(","),
+    api:"1",map_action:"map",center:location,
     zoom:p.layer === "Bairros" ? "14" : "19",basemap:"satellite"
   });
   mapsLink.className = "maps-link";
@@ -1683,7 +1693,16 @@ function selectFeature(feature, zoom) {
   mapsLink.target = "_blank";
   mapsLink.rel = "noopener";
   mapsLink.textContent = "Abrir no Google Maps · Satélite";
-  detail.replaceChildren(top,heading,mapsLink,fields);
+  const pinUrl = new URL("https://www.google.com/maps/search/");
+  pinUrl.search = new URLSearchParams({api:"1",query:location});
+  const pinLink = mapsLink.cloneNode(false);
+  pinLink.classList.add("maps-pin");
+  pinLink.href = pinUrl.href;
+  pinLink.textContent = "Ver pino no Google Maps";
+  const links = document.createElement("div");
+  links.className = "maps-actions";
+  links.append(pinLink,mapsLink);
+  detail.replaceChildren(top,heading,links,fields);
   detail.hidden = false;
   panel.hidden = false;
   detail.scrollTop = 0;
