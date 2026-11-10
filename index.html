@@ -1394,6 +1394,19 @@ button.secondary:hover,button.result:hover{background:#eaf1f5}
 .map-tools summary{display:flex;align-items:center;justify-content:center;cursor:pointer;list-style:none;border:1px solid #aebfc9;border-radius:6px;background:#fff;color:var(--ink);font-weight:700;font-size:.85rem;padding:.38rem .65rem}
 .map-tools summary::-webkit-details-marker{display:none}
 .layer-box{position:absolute;right:0;top:calc(100% + 5px);width:min(230px,75vw);background:#fff;border:1px solid var(--line);border-radius:7px;padding:10px;box-shadow:0 2px 8px #0003}
+#implantation{position:static}
+.implantation-box{width:min(308px,calc(100vw - 70px));max-height:min(48dvh,325px);overflow:auto}
+.implantation-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.implantation-box input:not([type=range]){width:100%;min-height:36px;border:1px solid #aebfc9;border-radius:6px;padding:5px 8px;font-size:16px}
+.implantation-box input[aria-invalid=true]{border-color:#ab321f}
+.implantation-angle{display:grid;grid-template-columns:minmax(0,1fr) 72px;align-items:center;gap:8px;margin-top:8px}
+.implantation-angle input[type=range]{width:100%;accent-color:var(--ink)}
+.implantation-box p{margin:7px 0;font-size:.8rem;line-height:1.35;color:var(--muted)}
+#implantation-area{display:block;font-size:1rem;font-weight:750;color:var(--ink)}
+.implantation-box button{box-shadow:none}
+.implantation-box button:disabled{opacity:.5;cursor:default}
+#map.is-placing,#map.is-placing .leaflet-interactive{cursor:crosshair}
+.implantation-path{filter:drop-shadow(0 0 1.5px #183743)}
 .layer-box select{font-size:.85rem}.layers{display:grid;gap:6px;margin-top:8px}
 .layers label{display:flex;align-items:center;gap:6px;margin:0;min-height:26px}
 .layers input{width:1rem;height:1rem;accent-color:var(--ink);margin:0}
@@ -1502,6 +1515,28 @@ SEMED · PPP
 </div>
 </details>
 
+<details id="implantation">
+<summary>Simular implantação</summary>
+<div class="layer-box implantation-box">
+<form id="implantation-form" novalidate>
+<div class="implantation-grid">
+<div><label for="implantation-width">Largura (m)</label><input id="implantation-width" inputmode="decimal" placeholder="20" maxlength="10" required></div>
+<div><label for="implantation-length">Comprimento (m)</label><input id="implantation-length" inputmode="decimal" placeholder="30" maxlength="10" required></div>
+</div>
+<div class="implantation-angle">
+<label for="implantation-angle">Rotação (° a partir do norte)</label>
+<input id="implantation-angle" type="number" min="0" max="359" step="1" value="0">
+</div>
+<input id="implantation-slider" type="range" min="0" max="359" step="1" value="0" aria-label="Ajustar rotação em graus">
+<output id="implantation-area" aria-live="polite"></output>
+<p id="implantation-status" role="status">Informe as medidas e escolha o centro no mapa.</p>
+<div class="measure-actions">
+<button id="implantation-place" class="primary" type="submit" aria-pressed="false">Posicionar</button>
+<button id="implantation-clear" class="secondary" type="button" disabled>Remover</button>
+</div>
+</form>
+</div>
+</details>
 <button id="overview" type="button" class="secondary">Vista geral</button>
 <details id="options">
 <summary>Camadas e filtros</summary>
@@ -1700,7 +1735,7 @@ for (const feature of features) {
     pointToLayer:(_,latlng) => L.circleMarker(latlng,{pane:p.layer,radius:6,color:"#fff",weight:1.5,fillColor:config.color,fillOpacity:1})
   });
   shape.on("click",event => {
-    if (measurement.active) return;
+    if (measurement.active || implantation.placing) return;
     const clicked = point ? null : event.latlng;
     selectFeature(feature,true,clicked);
   });
@@ -2013,12 +2048,146 @@ measureUndo.addEventListener("click",() => {
 measureFinish.addEventListener("click",() => stopMeasurement(false));
 measureClear.addEventListener("click",() => stopMeasurement(true));
 measurePanel.addEventListener("toggle",() => {
-  if (measurePanel.open) byId("options").open = false;
+  if (measurePanel.open) {
+    byId("options").open = false;
+    implantationPanel.open = false;
+    cancelImplantationPlacement();
+  }
 });
 byId("options").addEventListener("toggle",() => {
-  if (byId("options").open) measurePanel.open = false;
+  if (byId("options").open) {
+    measurePanel.open = false;
+    implantationPanel.open = false;
+    cancelImplantationPlacement();
+  }
 });
 drawMeasurement();
+
+const implantationPanel = byId("implantation");
+const implantationForm = byId("implantation-form");
+const implantationWidth = byId("implantation-width");
+const implantationLength = byId("implantation-length");
+const implantationAngle = byId("implantation-angle");
+const implantationSlider = byId("implantation-slider");
+const implantationArea = byId("implantation-area");
+const implantationStatus = byId("implantation-status");
+const implantationPlace = byId("implantation-place");
+const implantationClear = byId("implantation-clear");
+const implantation = {center:null,angle:0,placing:false};
+map.createPane("implantation").style.zIndex = 465;
+const implantationPolygon = L.polygon([],{
+  pane:"implantation",interactive:false,color:"#fff",fillColor:"#d40077",
+  weight:3,fillOpacity:.35,className:"implantation-path"
+});
+
+function implantationSize(input) {
+  const value = input.value.trim().replace(",",".");
+  const meters = /^\d+(?:\.\d{1,2})?$/.test(value) ? Number(value) : 0;
+  input.setAttribute("aria-invalid",String(Boolean(value) && (meters < .1 || meters > 10000)));
+  return meters >= .1 && meters <= 10000 ? meters : null;
+}
+
+function implantationCorners(center,width,length,angle) {
+  const radians = Math.PI / 180;
+  const rotation = angle * radians;
+  const lat = center.lat * radians, lon = center.lng * radians;
+  const distance = Math.hypot(width,length) / (2 * L.CRS.Earth.R);
+  const sinLat = Math.sin(lat), cosLat = Math.cos(lat);
+  const sinDistance = Math.sin(distance), cosDistance = Math.cos(distance);
+  // At 0°, length follows north and width follows east. Project each corner
+  // from the center in meters on the same sphere Leaflet uses for distances.
+  return [[-1,-1],[1,-1],[1,1],[-1,1]].map(([x,y]) => {
+    const bearing = Math.atan2(x*width,y*length) + rotation;
+    const cornerLat = Math.asin(sinLat*cosDistance + cosLat*sinDistance*Math.cos(bearing));
+    const cornerLon = lon + Math.atan2(Math.sin(bearing)*sinDistance*cosLat,cosDistance-sinLat*Math.sin(cornerLat));
+    return [cornerLat / radians,cornerLon / radians];
+  });
+}
+
+function drawImplantation() {
+  const width = implantationSize(implantationWidth);
+  const length = implantationSize(implantationLength);
+  const valid = width !== null && length !== null && implantationAngle.validity.valid && implantationAngle.value !== "";
+  if (!valid) implantation.placing = false;
+  map.getContainer().classList.toggle("is-placing",implantation.placing);
+  implantationPlace.setAttribute("aria-pressed",String(implantation.placing));
+  implantationPlace.textContent = implantation.placing ? "Cancelar" : implantation.center ? "Reposicionar" : "Posicionar";
+  implantationClear.disabled = !implantation.center;
+  implantationArea.textContent = width !== null && length !== null
+    ? "Área: " + new Intl.NumberFormat("pt-BR",{maximumFractionDigits:4}).format(width * length) + " m²" : "";
+  if (valid && implantation.center) {
+    implantationPolygon.setLatLngs(implantationCorners(implantation.center,width,length,implantation.angle)).addTo(map);
+  } else {
+    implantationPolygon.remove();
+  }
+  implantationStatus.textContent = !width || !length
+    ? "Informe medidas de 0,10 a 10.000 m, com até duas casas decimais."
+    : !valid ? "Informe uma rotação inteira de 0° a 359°."
+    : implantation.placing ? "Toque ou clique no mapa para definir o centro."
+    : implantation.center ? "Ajuste as medidas ou a rotação para comparar posições."
+    : "Selecione Posicionar e indique o centro no mapa.";
+  return valid;
+}
+
+function cancelImplantationPlacement() {
+  if (!implantation.placing) return;
+  implantation.placing = false;
+  drawImplantation();
+}
+
+implantationForm.addEventListener("submit",event => {
+  event.preventDefault();
+  if (implantation.placing) {
+    cancelImplantationPlacement();
+    return;
+  }
+  if (!drawImplantation()) {
+    (implantationSize(implantationWidth) === null ? implantationWidth :
+      implantationSize(implantationLength) === null ? implantationLength : implantationAngle).focus();
+    return;
+  }
+  if (measurement.active) stopMeasurement(false);
+  closePanel();
+  implantation.placing = true;
+  drawImplantation();
+});
+for (const input of [implantationWidth,implantationLength]) input.addEventListener("input",drawImplantation);
+implantationAngle.addEventListener("input",() => {
+  if (implantationAngle.value !== "" && implantationAngle.validity.valid) {
+    implantation.angle = Number(implantationAngle.value);
+    implantationSlider.value = implantationAngle.value;
+  }
+  drawImplantation();
+});
+implantationSlider.addEventListener("input",() => {
+  implantation.angle = Number(implantationSlider.value);
+  implantationAngle.value = implantationSlider.value;
+  drawImplantation();
+});
+implantationClear.addEventListener("click",() => {
+  implantation.center = null;
+  implantation.placing = false;
+  drawImplantation();
+  implantationPlace.focus();
+});
+implantationPanel.addEventListener("toggle",() => {
+  if (implantationPanel.open) {
+    measurePanel.open = false;
+    byId("options").open = false;
+  } else {
+    cancelImplantationPlacement();
+  }
+});
+document.addEventListener("keydown",event => {
+  if (event.key === "Escape") cancelImplantationPlacement();
+});
+map.on("click",event => {
+  if (!implantation.placing) return;
+  implantation.center = event.latlng;
+  implantation.placing = false;
+  drawImplantation();
+  map.fitBounds(implantationPolygon.getBounds(),{padding:[30,30],maxZoom:19,animate:false});
+});
 
 overview();
 changeBase();
