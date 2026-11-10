@@ -1359,6 +1359,12 @@ button.secondary:hover,button.result:hover{background:#eaf1f5}
 .map-tools{position:absolute;top:10px;right:10px;z-index:460;display:flex;flex-wrap:wrap;align-items:start;justify-content:end;gap:6px;max-width:calc(100% - 62px)}
 .map-tools button,.map-tools summary{min-height:33px;box-shadow:0 1px 4px #0003}
 .map-tools details{position:relative}
+.report-button{display:inline-flex;align-items:center;min-height:33px;padding:.38rem .65rem;
+  border:1px solid var(--ink);border-radius:6px;background:var(--ink);color:#fff;white-space:nowrap;
+  font-weight:700;font-size:.85rem;text-decoration:none;box-shadow:0 1px 4px #0003}
+.report-button:hover{background:#214e61}
+.report-button[download]{background:#fff;color:var(--ink)}
+.report-button[download]:hover{background:#eaf1f5}
 #measure{position:static}
 .measure-box{width:min(273px,79vw)}
 .measure-modes,.measure-actions{display:flex;flex-wrap:wrap;gap:5px}
@@ -1436,7 +1442,7 @@ dt{color:var(--muted)}dd{margin:0;overflow-wrap:anywhere}
  .search-field{grid-column:1/-1}
  input[type=search],select,.search-row button{min-height:40px;font-size:16px}
  .search-row button{padding-inline:12px;font-size:.9rem}
- .map-tools button,.map-tools summary{min-height:38px}
+ .map-tools button,.map-tools summary,.report-button{min-height:38px}
  #panel{top:auto;bottom:24px;left:8px;width:calc(100% - 16px);max-height:min(55%,420px)}
  .list{max-height:min(25dvh,190px)}
 }
@@ -1476,6 +1482,8 @@ SEMED · PPP
 <main class="map-area" aria-label="Mapa e camadas">
 <div id="map" aria-label="Mapa interativo de Manaus"></div>
 <div class="map-tools">
+<a class="report-button" href="./relatorio-locais.pdf" target="_blank" rel="noopener">Ver relatório (PDF)</a>
+<a class="report-button" href="./relatorio-locais.pdf" download="Relatório de localização.pdf">Baixar relatório (PDF)</a>
 <details id="measure">
 <summary>Medir</summary>
 <div class="layer-box measure-box">
