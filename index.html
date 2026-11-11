@@ -1730,6 +1730,9 @@ const selectedOutline = L.geoJSON(null,{pane:"selection",interactive:false,
 });
 const normalize = value => String(value ?? "").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("pt-BR");
 const features = data.features;
+const zoneByDistrict = new Map(features
+  .filter(({properties}) => properties.layer === "Bairros")
+  .map(({properties}) => [properties.title,properties.fields.Zona]));
 const overviewBounds = L.latLngBounds([]);
 let selected = null;
 const panel = byId("panel"), results = byId("results");
@@ -1825,7 +1828,7 @@ for (const feature of features) {
   p.searchCodes = p.codes.map(code => String(code).replace(/\D/g,"")).filter(Boolean);
 }
 function matchesSelectedZones(properties) {
-  return properties.layer !== "Bairros" || !selectedZones.size || selectedZones.has(properties.fields.Zona);
+  return !selectedZones.size || properties.districts.some(district => selectedZones.has(zoneByDistrict.get(district)));
 }
 
 function visibleResults() {
