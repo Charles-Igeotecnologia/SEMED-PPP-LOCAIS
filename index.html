@@ -1379,7 +1379,7 @@ button.secondary:hover,button.result:hover{background:#eaf1f5}
 #measure-value:empty{display:none}
 #map.is-measuring,#map.is-measuring .leaflet-interactive{cursor:crosshair}
 .measurement-path{filter:drop-shadow(0 0 1.5px #183743)}
-.district-boundary{filter:drop-shadow(0 0 1px #2d490b)}
+.district-boundary{filter:drop-shadow(0 0 1px #18242d)}
 .development-credit{font-weight:700}
 .point-pulse{
   transform-box:fill-box;transform-origin:center;pointer-events:none;
@@ -1416,6 +1416,10 @@ button.secondary:hover,button.result:hover{background:#eaf1f5}
   background:var(--ink);color:#fff;font-size:22px;line-height:1;box-shadow:0 1px 5px #0008}
 .leaflet-container .implantation-handle{cursor:grab}
 .leaflet-container .implantation-handle:active{cursor:grabbing}
+#options .layer-box{max-height:55dvh;overflow:auto}
+.zone-legend{margin-top:9px;padding-top:8px;border-top:1px solid var(--line);font-size:.75rem}
+.zone-legend ul{list-style:none;margin:5px 0 0;padding:0;display:grid;gap:4px}
+.zone-legend li{display:flex;align-items:center;gap:7px}
 .layer-box select{font-size:.85rem}.layers{display:grid;gap:6px;margin-top:8px}
 .layers label{display:flex;align-items:center;gap:6px;margin:0;min-height:26px}
 .layers input{width:1rem;height:1rem;accent-color:var(--ink);margin:0}
@@ -1559,6 +1563,10 @@ SEMED · PPP
 <div class="layer-box">
 <label for="district-filter">Bairro</label><select id="district-filter"><option value="">Todos</option></select>
 <div id="layers" class="layers" role="group" aria-label="Camadas visíveis"></div>
+<div id="zone-legend" class="zone-legend" role="group" aria-labelledby="zone-legend-title">
+<strong id="zone-legend-title">Zonas administrativas</strong>
+<ul id="zone-colors"></ul>
+</div>
 </div>
 </details>
 </div>
@@ -1618,10 +1626,18 @@ const byId = id => document.getElementById(id);
 const layers = {
   Locais: {label:"Locais (pontos)", singular:"Local", color:"#075d9b", pane:450},
   Lotes: {label:"Lotes (polígonos)", singular:"Lote", color:"#ac480f", pane:430},
-  Bairros: {label:"Bairros", singular:"Bairro", color:"#adf044", pane:410},
+  Bairros: {label:"Bairros", singular:"Bairro", color:"#748598", pane:410},
   Escolas: {label:"Escolas", singular:"Escola", color:"#7846a7", pane:452, optional:true},
   LocaisArquivados: {label:"Pontos arquivados", singular:"Ponto arquivado", color:"#526173", pane:449,
     optional:true, layerControlOnly:true}
+};
+const zoneColors = {
+  "ZONA NORTE":"#4DAAFF",
+  "ZONA SUL":"#F45A9B",
+  "ZONA LESTE":"#B892FF",
+  "ZONA OESTE":"#FF9D50",
+  "ZONA CENTRO-SUL":"#F5DC56",
+  "ZONA CENTRO-OESTE":"#3DD6AB"
 };
 const map = L.map("map", {maxZoom:21, zoomControl:false});
 L.control.zoom({position:"topleft",zoomInTitle:"Aproximar",zoomOutTitle:"Afastar"}).addTo(map);
@@ -1722,6 +1738,14 @@ function closePanel() {
 }
 const resultButtons = new Map();
 const search = byId("search"), layerFilter = byId("layer-filter"), districtFilter = byId("district-filter");
+for (const [zone,color] of Object.entries(zoneColors)) {
+  const item = document.createElement("li");
+  const swatch = document.createElement("span");
+  swatch.className = "dot";
+  swatch.style.setProperty("--c",color);
+  item.append(swatch,zone);
+  byId("zone-colors").append(item);
+}
 for (const [key, config] of Object.entries(layers)) {
   map.createPane(key).style.zIndex = config.pane;
   group[key] = L.layerGroup().addTo(map);
@@ -1731,6 +1755,7 @@ for (const [key, config] of Object.entries(layers)) {
   input.type = "checkbox";
   input.checked = !config.optional;
   input.addEventListener("change", () => {
+    if (key === "Bairros") byId("zone-legend").hidden = !input.checked;
     if (!input.checked && selected?.properties.layer === key) clearSelection();
     if (config.optional) {
       if (!input.checked && layerFilter.value === key) layerFilter.value = "";
@@ -1754,10 +1779,11 @@ for (const district of [...new Set(features.flatMap(f => f.properties.districts)
 for (const feature of features) {
   const p = feature.properties, config = layers[p.layer];
   const boundary = p.layer === "Bairros";
+  const color = boundary ? zoneColors[p.fields.Zona] ?? config.color : config.color;
   const point = feature.geometry.type === "Point";
   const shape = L.geoJSON(feature,{pane:p.layer,
     style: boundary
-      ? {color:config.color,weight:2,opacity:.95,fillColor:"#82dc24",fillOpacity:.17,className:"district-boundary"}
+      ? {color,weight:2,opacity:.95,fillOpacity:.26,className:"district-boundary"}
       : {color:config.color,weight:2.4,fillOpacity:.23},
     pointToLayer:(_,latlng) => L.circleMarker(latlng,{pane:p.layer,radius:6,color:"#fff",weight:1.5,fillColor:config.color,fillOpacity:1})
   });
