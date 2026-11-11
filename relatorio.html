@@ -24,6 +24,21 @@ section+section{margin-top:1.65rem}
 h2{margin:0 0 .45rem;font-size:1.1rem}
 img{display:block;width:100%;height:auto;border:1px solid #c5d7de;background:#fff;box-shadow:0 3px 14px #17334318}
 footer{margin-top:1.5rem}
+.ficha-cabecalho{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.45rem}
+.ficha-cabecalho h2{margin:0}
+button{font:inherit;font-weight:650;cursor:pointer;color:#173343;background:#fff;border:1px solid #9fb7c3;border-radius:6px;min-height:44px;padding:.35rem .75rem}
+button:focus-visible,.mapa-ampliado:focus-visible{outline:3px solid #0e7a87;outline-offset:-3px}
+button:disabled{opacity:.5;cursor:default}
+dialog{width:min(96vw,68rem);max-height:96dvh;padding:0;border:1px solid #c5d7de;border-radius:10px;background:#fff;color:inherit}
+dialog::backdrop{background:#0b202bcc}
+body:has(dialog[open]){overflow:hidden}
+.leitor-cabecalho,.leitor-zoom{display:flex;align-items:center;flex-wrap:wrap;gap:.5rem;padding:.5rem .75rem}
+.leitor-cabecalho{justify-content:space-between;background:#edf3f4}
+.leitor-cabecalho h2{margin:0}
+.leitor-zoom output{min-width:4ch;text-align:center;font-variant-numeric:tabular-nums}
+.mapa-ampliado{height:min(65dvh,43rem);overflow:auto;scrollbar-gutter:stable;overscroll-behavior:contain;background:#dfe8e9}
+.mapa-ampliado img{height:auto;max-width:none;border:0;box-shadow:none;user-select:none;margin-inline:auto}
+.leitor-nota{margin:0;padding:.35rem .75rem;font-size:.75rem;color:#455f6a}
 </style>
 </head>
 <body id="topo">
@@ -51,26 +66,103 @@ footer{margin-top:1.5rem}
     <img src="./relatorio-paginas/01.webp" alt="Mapa geral e índice dos cinco lotes" width="1191" height="1684">
   </section>
   <section id="vila-buriti" aria-labelledby="vila-buriti-titulo">
-    <h2 id="vila-buriti-titulo">Vila Buriti</h2>
+    <div class="ficha-cabecalho">
+      <h2 id="vila-buriti-titulo">Vila Buriti</h2>
+      <button type="button" data-mapa="./relatorio-paginas/mapa-02.webp" aria-label="Ampliar mapa de Vila Buriti" aria-haspopup="dialog">Ampliar mapa</button>
+    </div>
     <img src="./relatorio-paginas/02.webp" alt="Polígono 39 sobre imagem de satélite, área de 4.600,00 m²" width="1191" height="1684" loading="lazy">
   </section>
   <section id="nova-cidade" aria-labelledby="nova-cidade-titulo">
-    <h2 id="nova-cidade-titulo">Nova Cidade</h2>
+    <div class="ficha-cabecalho">
+      <h2 id="nova-cidade-titulo">Nova Cidade</h2>
+      <button type="button" data-mapa="./relatorio-paginas/mapa-03.webp" aria-label="Ampliar mapa de Nova Cidade" aria-haspopup="dialog">Ampliar mapa</button>
+    </div>
     <img src="./relatorio-paginas/03.webp" alt="Polígono 38 sobre imagem de satélite, área de 22.500,00 m²" width="1191" height="1684" loading="lazy">
   </section>
   <section id="lago-azul" aria-labelledby="lago-azul-titulo">
-    <h2 id="lago-azul-titulo">Lago Azul</h2>
+    <div class="ficha-cabecalho">
+      <h2 id="lago-azul-titulo">Lago Azul</h2>
+      <button type="button" data-mapa="./relatorio-paginas/mapa-04.webp" aria-label="Ampliar mapa de Lago Azul" aria-haspopup="dialog">Ampliar mapa</button>
+    </div>
     <img src="./relatorio-paginas/04.webp" alt="Polígono 33 sobre imagem de satélite, área de 27.109,98 m²" width="1191" height="1684" loading="lazy">
   </section>
   <section id="planalto" aria-labelledby="planalto-titulo">
-    <h2 id="planalto-titulo">Planalto</h2>
+    <div class="ficha-cabecalho">
+      <h2 id="planalto-titulo">Planalto</h2>
+      <button type="button" data-mapa="./relatorio-paginas/mapa-05.webp" aria-label="Ampliar mapa de Planalto" aria-haspopup="dialog">Ampliar mapa</button>
+    </div>
     <img src="./relatorio-paginas/05.webp" alt="Polígono 28 sobre imagem de satélite, área de 13.261,79 m²" width="1191" height="1684" loading="lazy">
   </section>
   <section id="compensa" aria-labelledby="compensa-titulo">
-    <h2 id="compensa-titulo">Compensa</h2>
+    <div class="ficha-cabecalho">
+      <h2 id="compensa-titulo">Compensa</h2>
+      <button type="button" data-mapa="./relatorio-paginas/mapa-06.webp" aria-label="Ampliar mapa de Compensa" aria-haspopup="dialog">Ampliar mapa</button>
+    </div>
     <img src="./relatorio-paginas/06.webp" alt="Polígono 35 sobre imagem de satélite, área de 21.491,86 m²" width="1191" height="1684" loading="lazy">
   </section>
   <footer><a href="#topo">Voltar ao início</a></footer>
 </main>
+<dialog id="leitor-mapa" aria-labelledby="leitor-titulo">
+  <div class="leitor-cabecalho">
+    <h2 id="leitor-titulo"></h2>
+    <form method="dialog"><button type="submit">Fechar</button></form>
+  </div>
+  <div class="leitor-zoom" role="group" aria-label="Zoom do mapa">
+    <button id="reduzir-mapa" type="button" aria-label="Reduzir zoom">−</button>
+    <output id="zoom-atual" aria-live="polite">100%</output>
+    <button id="ampliar-mapa" type="button" aria-label="Aumentar zoom">+</button>
+    <button id="ajustar-mapa" type="button">Ajustar à tela</button>
+  </div>
+  <div class="mapa-ampliado" tabindex="0" role="region" aria-label="Mapa de satélite com rolagem">
+    <img alt="" width="1279" height="881" draggable="false">
+  </div>
+  <p class="leitor-nota">Deslize o mapa ampliado para ver o entorno. Imagem © Esri, Vantor, Earthstar Geographics e GIS User Community.</p>
+</dialog>
+<script>
+const dialog = document.getElementById("leitor-mapa");
+const viewport = dialog.querySelector(".mapa-ampliado");
+const mapImage = viewport.querySelector("img");
+const zoomOutput = document.getElementById("zoom-atual");
+const zoomIn = document.getElementById("ampliar-mapa");
+const zoomOut = document.getElementById("reduzir-mapa");
+const reset = document.getElementById("ajustar-mapa");
+const zoomLevels = [1,1.5,2,3,4];
+let level = 0;
+
+function setZoom(nextLevel) {
+  const centerX = (viewport.scrollLeft + Math.min(viewport.clientWidth,mapImage.offsetWidth)/2) /
+    mapImage.offsetWidth;
+  const centerY = (viewport.scrollTop + Math.min(viewport.clientHeight,mapImage.offsetHeight)/2) /
+    mapImage.offsetHeight;
+  level = nextLevel;
+  const percent = zoomLevels[level]*100;
+  const fitWidth = Math.min(viewport.clientWidth,viewport.clientHeight*1279/881);
+  mapImage.style.width = fitWidth*zoomLevels[level] + "px";
+  viewport.scrollLeft = centerX*mapImage.offsetWidth - viewport.clientWidth/2;
+  viewport.scrollTop = centerY*mapImage.offsetHeight - viewport.clientHeight/2;
+  zoomOutput.textContent = percent + "%";
+  zoomOut.disabled = reset.disabled = level === 0;
+  zoomIn.disabled = level === zoomLevels.length-1;
+}
+
+for (const button of document.querySelectorAll("[data-mapa]")) {
+  button.addEventListener("click",() => {
+    const section = button.closest("section");
+    document.getElementById("leitor-titulo").textContent = section.querySelector("h2").textContent;
+    mapImage.alt = section.querySelector("img").alt;
+    mapImage.src = button.dataset.mapa;
+    mapImage.style.width = "100%";
+    dialog.showModal();
+    viewport.scrollTo(0,0);
+    setZoom(0);
+  });
+}
+zoomIn.addEventListener("click",() => setZoom(level+1));
+zoomOut.addEventListener("click",() => setZoom(level-1));
+reset.addEventListener("click",() => setZoom(0));
+new ResizeObserver(() => {
+  if (dialog.open) setZoom(level);
+}).observe(viewport);
+</script>
 </body>
 </html>
