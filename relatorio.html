@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Relatório de localização | SEMED Manaus</title>
+<style>
+*{box-sizing:border-box}
+html{scroll-padding-top:1rem}
+body{margin:0;background:#edf3f4;color:#173343;font:16px/1.5 system-ui,sans-serif}
+header{background:#173343;color:#fff}
+.wrap{max-width:57rem;margin:auto;padding:1.25rem}
+.eyebrow{margin:0;color:#c5e9e9;font-weight:700;font-size:.85rem}
+h1{margin:.25rem 0 .75rem;font-size:clamp(1.6rem,4.5vw,2.25rem);line-height:1.15}
+.actions,nav{display:flex;flex-wrap:wrap;gap:.5rem}
+a{color:#0b5364;font-weight:650;text-underline-offset:.18em}
+.actions a{padding:.5rem .75rem;border:1px solid #bbd3db;border-radius:6px;color:#fff}
+.actions a[download]{background:#fff;color:#173343}
+nav{padding-bottom:1.25rem}
+nav a{background:#fff;border:1px solid #c5d7de;border-radius:6px;padding:.42rem .7rem}
+a:focus-visible{outline:3px solid #0e7a87;outline-offset:3px}
+header a:focus-visible{outline-color:#f2d968}
+section+section{margin-top:1.65rem}
+h2{margin:0 0 .45rem;font-size:1.1rem}
+img{display:block;width:100%;height:auto;border:1px solid #c5d7de;background:#fff;box-shadow:0 3px 14px #17334318}
+footer{margin-top:1.5rem}
+</style>
+</head>
+<body id="topo">
+<header>
+  <div class="wrap">
+    <p class="eyebrow">SEMED Manaus · PPP</p>
+    <h1>Relatório de localização</h1>
+    <div class="actions">
+      <a href="./">Voltar ao mapa</a>
+      <a href="./relatorio-locais.pdf?rev=4e524d7" download="Relatório de localização.pdf">Baixar PDF</a>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <nav aria-label="Páginas do relatório">
+    <a href="#visao-geral">Visão geral</a>
+    <a href="#vila-buriti">Vila Buriti</a>
+    <a href="#nova-cidade">Nova Cidade</a>
+    <a href="#lago-azul">Lago Azul</a>
+    <a href="#planalto">Planalto</a>
+    <a href="#compensa">Compensa</a>
+  </nav>
+  <section id="visao-geral" aria-labelledby="visao-geral-titulo">
+    <h2 id="visao-geral-titulo">Visão geral</h2>
+    <img src="./relatorio-paginas/01.webp" alt="Mapa geral e índice dos cinco lotes" width="1191" height="1684">
+  </section>
+  <section id="vila-buriti" aria-labelledby="vila-buriti-titulo">
+    <h2 id="vila-buriti-titulo">Vila Buriti</h2>
+    <img src="./relatorio-paginas/02.webp" alt="Polígono 39 sobre imagem de satélite, área de 4.600,00 m²" width="1191" height="1684" loading="lazy">
+  </section>
+  <section id="nova-cidade" aria-labelledby="nova-cidade-titulo">
+    <h2 id="nova-cidade-titulo">Nova Cidade</h2>
+    <img src="./relatorio-paginas/03.webp" alt="Polígono 38 sobre imagem de satélite, área de 22.500,00 m²" width="1191" height="1684" loading="lazy">
+  </section>
+  <section id="lago-azul" aria-labelledby="lago-azul-titulo">
+    <h2 id="lago-azul-titulo">Lago Azul</h2>
+    <img src="./relatorio-paginas/04.webp" alt="Polígono 33 sobre imagem de satélite, área de 27.109,98 m²" width="1191" height="1684" loading="lazy">
+  </section>
+  <section id="planalto" aria-labelledby="planalto-titulo">
+    <h2 id="planalto-titulo">Planalto</h2>
+    <img src="./relatorio-paginas/05.webp" alt="Polígono 28 sobre imagem de satélite, área de 13.261,79 m²" width="1191" height="1684" loading="lazy">
+  </section>
+  <section id="compensa" aria-labelledby="compensa-titulo">
+    <h2 id="compensa-titulo">Compensa</h2>
+    <img src="./relatorio-paginas/06.webp" alt="Polígono 35 sobre imagem de satélite, área de 21.491,86 m²" width="1191" height="1684" loading="lazy">
+  </section>
+  <footer><a href="#topo">Voltar ao início</a></footer>
+</main>
+</body>
+</html>
