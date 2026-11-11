@@ -1427,6 +1427,16 @@ button.secondary:hover,button.result:hover{background:#eaf1f5}
 .layers label{display:flex;align-items:center;gap:6px;margin:0;min-height:26px}
 .layers input{width:1rem;height:1rem;accent-color:var(--ink);margin:0}
 .dot{display:inline-block;width:.65rem;height:.65rem;border-radius:50%;background:var(--c);border:1px solid #fff;outline:1px solid var(--c)}
+.school-alert{position:relative;display:inline-grid;place-items:center;width:17px;height:16px;flex:none;
+  color:#282016;font-weight:900;font-size:11px;line-height:1;isolation:isolate}
+.school-alert::before,.school-alert::after{content:"";position:absolute;
+  clip-path:polygon(50% 0,100% 100%,0 100%)}
+.school-alert::before{inset:0;background:#282016;z-index:-2}
+.school-alert::after{inset:3px 2px 1px;background:#ffda38;z-index:-1}
+.school-alert span{padding-top:3px}
+.leaflet-marker-icon.school-alert{position:absolute;font-size:16px;filter:drop-shadow(0 1px 2px #0009)}
+.leaflet-marker-icon.school-alert::after{inset:4px 3px 2px}
+.leaflet-marker-icon.school-alert span{padding-top:5px}
 #panel{position:absolute;z-index:455;top:10px;left:52px;width:min(365px,calc(100% - 72px));max-height:calc(100% - 42px);display:flex;flex-direction:column;border:1px solid var(--line);border-radius:8px;background:#fff;box-shadow:0 3px 14px #0004;overflow:hidden}
 .panel-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 10px;border-bottom:1px solid #e1e8ec;background:#f8fafb}
 .panel-actions{display:flex;gap:5px}
@@ -1632,7 +1642,7 @@ const layers = {
   Locais: {label:"Locais (pontos)", singular:"Local", color:"#075d9b", pane:450},
   Lotes: {label:"Lotes (polígonos)", singular:"Lote", color:"#ac480f", pane:430},
   Bairros: {label:"Bairros", singular:"Bairro", color:"#748598", pane:410},
-  Escolas: {label:"Escolas", singular:"Escola", color:"#7846a7", pane:452, optional:true},
+  Escolas: {label:"Escolas", singular:"Escola", color:"#ffda38", pane:452, optional:true},
   LocaisArquivados: {label:"Pontos arquivados", singular:"Ponto arquivado", color:"#526173", pane:449,
     optional:true, layerControlOnly:true}
 };
@@ -1749,6 +1759,9 @@ const search = byId("search"), layerFilter = byId("layer-filter"), districtFilte
 const selectedZones = new Set();
 const zoneList = byId("zone-colors");
 const clearZones = byId("clear-zones");
+const schoolAlertIcon = L.divIcon({
+  className:"school-alert",html:'<span aria-hidden="true">!</span>',iconSize:[28,26],iconAnchor:[14,13]
+});
 for (const [zone,color] of Object.entries(zoneColors)) {
   const item = document.createElement("li");
   const swatch = document.createElement("span");
@@ -1787,8 +1800,14 @@ for (const [key, config] of Object.entries(layers)) {
   });
   toggles[key] = input;
   const dot = document.createElement("span");
-  dot.className = "dot";
+  dot.className = key === "Escolas" ? "school-alert" : "dot";
   dot.style.setProperty("--c", config.color);
+  if (key === "Escolas") {
+    const exclamation = document.createElement("span");
+    exclamation.textContent = "!";
+    dot.setAttribute("aria-hidden","true");
+    dot.append(exclamation);
+  }
   label.append(input,dot,config.label);
   byId("layers").append(label);
 }
@@ -1802,11 +1821,14 @@ for (const feature of features) {
   const boundary = p.layer === "Bairros";
   const color = boundary ? zoneColors[p.fields.Zona] ?? config.color : config.color;
   const point = feature.geometry.type === "Point";
+  const school = p.layer === "Escolas";
   const shape = L.geoJSON(feature,{pane:p.layer,
     style: boundary
       ? {color,weight:2,opacity:.95,fillOpacity:.26,className:"district-boundary"}
       : {color:config.color,weight:2.4,fillOpacity:.23},
-    pointToLayer:(_,latlng) => L.circleMarker(latlng,{pane:p.layer,radius:6,color:"#fff",weight:1.5,fillColor:config.color,fillOpacity:1})
+    pointToLayer:(_,latlng) => school
+      ? L.marker(latlng,{pane:p.layer,icon:schoolAlertIcon,title:p.title,bubblingMouseEvents:true})
+      : L.circleMarker(latlng,{pane:p.layer,radius:6,color:"#fff",weight:1.5,fillColor:config.color,fillOpacity:1})
   });
   shape.on("click",event => {
     if (measurement.active || implantation.placing) return;
@@ -1818,7 +1840,7 @@ for (const feature of features) {
   shape.bindTooltip(tooltip,p.layer === "Locais" ? {permanent:true,direction:"top",className:"lot-label",opacity:1} : {sticky:true});
   shapes.set(feature.id,shape);
   if (!boundary && !config.optional) overviewBounds.extend(shape.getBounds());
-  if (point) {
+  if (point && !school) {
     pointPulses.set(feature.id,L.circleMarker(p.center,{
       pane:"point-pulses",interactive:false,className:"point-pulse",
       radius:8,color:"#fff",weight:1.8,fill:false
