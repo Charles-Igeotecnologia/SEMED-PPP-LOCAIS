@@ -1419,7 +1419,10 @@ button.secondary:hover,button.result:hover{background:#eaf1f5}
 #options .layer-box{max-height:55dvh;overflow:auto}
 .zone-legend{margin-top:9px;padding-top:8px;border-top:1px solid var(--line);font-size:.75rem}
 .zone-legend ul{list-style:none;margin:5px 0 0;padding:0;display:grid;gap:4px}
-.zone-legend li{display:flex;align-items:center;gap:7px}
+.zone-legend label{display:flex;align-items:center;gap:7px;min-height:28px;margin:0;cursor:pointer}
+.zone-legend input{width:1rem;height:1rem;accent-color:var(--ink);margin:0}
+.zone-legend p{margin:4px 0;color:var(--muted)}
+.zone-legend button{margin-top:6px}
 .layer-box select{font-size:.85rem}.layers{display:grid;gap:6px;margin-top:8px}
 .layers label{display:flex;align-items:center;gap:6px;margin:0;min-height:26px}
 .layers input{width:1rem;height:1rem;accent-color:var(--ink);margin:0}
@@ -1565,7 +1568,9 @@ SEMED · PPP
 <div id="layers" class="layers" role="group" aria-label="Camadas visíveis"></div>
 <div id="zone-legend" class="zone-legend" role="group" aria-labelledby="zone-legend-title">
 <strong id="zone-legend-title">Zonas administrativas</strong>
-<ul id="zone-colors"></ul>
+<p id="zone-hint">Sem seleção, aparecem todas as zonas.</p>
+<ul id="zone-colors" aria-describedby="zone-hint"></ul>
+<button id="clear-zones" type="button" class="secondary" hidden>Mostrar todas as zonas</button>
 </div>
 </div>
 </details>
@@ -1738,13 +1743,27 @@ function closePanel() {
 }
 const resultButtons = new Map();
 const search = byId("search"), layerFilter = byId("layer-filter"), districtFilter = byId("district-filter");
+const selectedZones = new Set();
+const zoneList = byId("zone-colors");
+const clearZones = byId("clear-zones");
 for (const [zone,color] of Object.entries(zoneColors)) {
   const item = document.createElement("li");
   const swatch = document.createElement("span");
   swatch.className = "dot";
   swatch.style.setProperty("--c",color);
-  item.append(swatch,zone);
-  byId("zone-colors").append(item);
+  const label = document.createElement("label");
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  input.value = zone;
+  input.addEventListener("change",() => {
+    if (input.checked) selectedZones.add(zone);
+    else selectedZones.delete(zone);
+    clearZones.hidden = selectedZones.size === 0;
+    updateResults();
+  });
+  label.append(input,swatch,zone);
+  item.append(label);
+  zoneList.append(item);
 }
 for (const [key, config] of Object.entries(layers)) {
   map.createPane(key).style.zIndex = config.pane;
@@ -1755,7 +1774,6 @@ for (const [key, config] of Object.entries(layers)) {
   input.type = "checkbox";
   input.checked = !config.optional;
   input.addEventListener("change", () => {
-    if (key === "Bairros") byId("zone-legend").hidden = !input.checked;
     if (!input.checked && selected?.properties.layer === key) clearSelection();
     if (config.optional) {
       if (!input.checked && layerFilter.value === key) layerFilter.value = "";
@@ -1806,9 +1824,14 @@ for (const feature of features) {
   p.searchText = normalize([p.title,config.label,...p.districts,...Object.values(p.fields)].join(" "));
   p.searchCodes = p.codes.map(code => String(code).replace(/\D/g,"")).filter(Boolean);
 }
+function matchesSelectedZones(properties) {
+  return properties.layer !== "Bairros" || !selectedZones.size || selectedZones.has(properties.fields.Zona);
+}
+
 function visibleResults() {
   const query = normalize(search.value).trim().replace(/\s+/g," ");
   const scoped = features.filter(({properties:p}) =>
+    matchesSelectedZones(p) &&
     (!layers[p.layer].optional || toggles[p.layer].checked) &&
     (!layerFilter.value || p.layer === layerFilter.value) &&
     (!districtFilter.value || p.districts.includes(districtFilter.value))
@@ -1822,13 +1845,15 @@ function visibleResults() {
   ));
 }
 function updateMap() {
+  byId("zone-legend").hidden = !toggles.Bairros.checked;
   const filtered = search.value.trim() || layerFilter.value || districtFilter.value;
   for (const vectorGroup of Object.values(group)) vectorGroup.clearLayers();
   pulseLayer.clearLayers();
   const matches = new Set(visibleResults().map(f => f.id));
   for (const feature of features) {
     const key = feature.properties.layer;
-    if (!toggles[key].checked || (filtered && key !== "Bairros" && !matches.has(feature.id))) continue;
+    if (!toggles[key].checked || !matchesSelectedZones(feature.properties) ||
+        (filtered && key !== "Bairros" && !matches.has(feature.id))) continue;
     if (key === "Bairros" && layerFilter.value === key && !matches.has(feature.id)) continue;
     group[key].addLayer(shapes.get(feature.id));
     const pulse = pointPulses.get(feature.id);
@@ -1976,7 +2001,19 @@ document.addEventListener("keydown",event => {
     search.focus();
   }
 });
+function resetZones() {
+  selectedZones.clear();
+  for (const input of zoneList.querySelectorAll("input")) input.checked = false;
+  clearZones.hidden = true;
+}
+
+clearZones.addEventListener("click",() => {
+  resetZones();
+  updateResults();
+  zoneList.querySelector("input").focus();
+});
 byId("clear").addEventListener("click",() => {
+  resetZones();
   search.value = layerFilter.value = districtFilter.value = "";
   closePanel();
   updateResults();
