@@ -11,6 +11,10 @@ Página única (`index.html`) em quatro abas:
 
 Referência espacial: base oficial em semef_SIR2000 (SIRGAS 2000 / TM MC −60, padrão SEMEF); cópia em SIRGAS 2000 / UTM 20S (EPSG:31980); web em WGS 84 (EPSG:4326). Áreas e perímetros calculados no RTM.
 
+## Atualização
+
+O `index.html` não guarda dados: lê `dados/ppp_dados.js`, gerado pelo script `03_SCRIPTS/04_ATUALIZAR_APP.bat` da pasta do projeto a partir da base geográfica e das tabelas de `02_TABELAS`. Área nova na base gera automaticamente seu cartão, sua ficha no SIG, seus downloads e sua página no relatório.
+
 Documentos dominiais e cadastrais (matrículas, BCI, plantas) são de acesso interno e não estão publicados neste repositório.
 
 Base preliminar, sujeita a validação fundiária e topográfica. Novas áreas são incorporadas à medida que forem identificadas e validadas.

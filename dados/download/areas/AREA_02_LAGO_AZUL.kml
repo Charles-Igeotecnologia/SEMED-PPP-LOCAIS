@@ -14,7 +14,7 @@
 	<SimpleField name="TIPO" type="string"></SimpleField>
 </Schema>
 <Folder><name>AREA_02_LAGO_AZUL</name>
-  <Placemark id="AREA_02_LAGO_AZUL.1">
+  <Placemark>
 	<name>Área 02 · Lago Azul (Polígono)</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#AREA_02_LAGO_AZUL">
@@ -31,7 +31,7 @@
 	</SchemaData></ExtendedData>
       <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9816029399888,-2.9640871112299 -59.9821048237301,-2.96267549294182 -59.9806721203784,-2.96219567055148 -59.9802285839717,-2.96360141277332 -59.9816029399888,-2.9640871112299</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
   </Placemark>
-  <Placemark id="AREA_02_LAGO_AZUL.2">
+  <Placemark>
 	<name>Área 02 · Lago Azul (Ponto)</name>
 	<ExtendedData><SchemaData schemaUrl="#AREA_02_LAGO_AZUL">
 		<SimpleData name="AREA_ID">AREA_02</SimpleData>

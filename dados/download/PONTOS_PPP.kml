@@ -2,76 +2,82 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document id="root_doc">
 <Schema name="PONTOS_PPP" id="PONTOS_PPP">
+	<SimpleField name="Name" type="string"></SimpleField>
 	<SimpleField name="AREA_ID" type="string"></SimpleField>
-	<SimpleField name="NOME" type="string"></SimpleField>
 	<SimpleField name="EMPREEND" type="string"></SimpleField>
 	<SimpleField name="BAIRRO" type="string"></SimpleField>
 	<SimpleField name="ENDERECO" type="string"></SimpleField>
 	<SimpleField name="CEP" type="string"></SimpleField>
+	<SimpleField name="ORIGEM" type="string"></SimpleField>
 	<SimpleField name="LAT" type="float"></SimpleField>
 	<SimpleField name="LON" type="float"></SimpleField>
 </Schema>
 <Folder><name>PONTOS_PPP</name>
-  <Placemark id="PONTOS_PPP.1">
+  <Placemark>
+	<name>Área 01</name>
 	<ExtendedData><SchemaData schemaUrl="#PONTOS_PPP">
 		<SimpleData name="AREA_ID">AREA_01</SimpleData>
-		<SimpleData name="NOME">Área 01</SimpleData>
 		<SimpleData name="EMPREEND">Modelo inovador – “Tucandeira”</SimpleData>
 		<SimpleData name="BAIRRO">Nova Cidade</SimpleData>
 		<SimpleData name="ENDERECO">Acesso pela Rua Saracura Mira, S/N</SimpleData>
 		<SimpleData name="CEP">69017-350</SimpleData>
+		<SimpleData name="ORIGEM">camada de pontos</SimpleData>
 		<SimpleData name="LAT">-2.986464</SimpleData>
 		<SimpleData name="LON">-59.975055</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-59.9750547506176,-2.98646365081519</coordinates></Point>
   </Placemark>
-  <Placemark id="PONTOS_PPP.2">
+  <Placemark>
+	<name>Área 02</name>
 	<ExtendedData><SchemaData schemaUrl="#PONTOS_PPP">
 		<SimpleData name="AREA_ID">AREA_02</SimpleData>
-		<SimpleData name="NOME">Área 02</SimpleData>
 		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
 		<SimpleData name="BAIRRO">Lago Azul</SimpleData>
 		<SimpleData name="ENDERECO">Rua Raio de Luz, S/N</SimpleData>
 		<SimpleData name="CEP">69018-688</SimpleData>
+		<SimpleData name="ORIGEM">camada de pontos</SimpleData>
 		<SimpleData name="LAT">-2.963075</SimpleData>
 		<SimpleData name="LON">-59.98116</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-59.9811598982449,-2.96307451697881</coordinates></Point>
   </Placemark>
-  <Placemark id="PONTOS_PPP.3">
+  <Placemark>
+	<name>Área 03</name>
 	<ExtendedData><SchemaData schemaUrl="#PONTOS_PPP">
 		<SimpleData name="AREA_ID">AREA_03</SimpleData>
-		<SimpleData name="NOME">Área 03</SimpleData>
 		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
 		<SimpleData name="BAIRRO">Planalto</SimpleData>
 		<SimpleData name="ENDERECO">Rua Camila, S/N</SimpleData>
 		<SimpleData name="CEP">69044-232</SimpleData>
+		<SimpleData name="ORIGEM">camada de pontos</SimpleData>
 		<SimpleData name="LAT">-3.061293</SimpleData>
 		<SimpleData name="LON">-60.063754</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-60.0637535950145,-3.06129347148468</coordinates></Point>
   </Placemark>
-  <Placemark id="PONTOS_PPP.4">
+  <Placemark>
+	<name>Área 04</name>
 	<ExtendedData><SchemaData schemaUrl="#PONTOS_PPP">
 		<SimpleData name="AREA_ID">AREA_04</SimpleData>
-		<SimpleData name="NOME">Área 04</SimpleData>
 		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
 		<SimpleData name="BAIRRO">Compensa</SimpleData>
 		<SimpleData name="ENDERECO">Travessa Pina de Moraes / Antiga Travessa São José, S/N</SimpleData>
 		<SimpleData name="CEP">69035-030</SimpleData>
+		<SimpleData name="ORIGEM">camada de pontos</SimpleData>
 		<SimpleData name="LAT">-3.110932</SimpleData>
 		<SimpleData name="LON">-60.060387</SimpleData>
 	</SchemaData></ExtendedData>
       <Point><coordinates>-60.060386654614,-3.11093200315559</coordinates></Point>
   </Placemark>
-  <Placemark id="PONTOS_PPP.5">
+  <Placemark>
+	<name>Área 05</name>
 	<ExtendedData><SchemaData schemaUrl="#PONTOS_PPP">
 		<SimpleData name="AREA_ID">AREA_05</SimpleData>
-		<SimpleData name="NOME">Área 05</SimpleData>
 		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
 		<SimpleData name="BAIRRO">Vila Buriti</SimpleData>
 		<SimpleData name="ENDERECO">Acesso pela Rua Marinheiro Greenhalgh, S/N</SimpleData>
 		<SimpleData name="CEP">69074-160</SimpleData>
+		<SimpleData name="ORIGEM">camada de pontos</SimpleData>
 		<SimpleData name="LAT">-3.136493</SimpleData>
 		<SimpleData name="LON">-59.94433</SimpleData>
 	</SchemaData></ExtendedData>

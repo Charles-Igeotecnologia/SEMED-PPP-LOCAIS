@@ -2,9 +2,9 @@
 <kml xmlns="http://www.opengis.net/kml/2.2">
 <Document id="root_doc">
 <Schema name="LOTES_MONTE_HOREBE" id="LOTES_MONTE_HOREBE">
+	<SimpleField name="Name" type="string"></SimpleField>
 	<SimpleField name="SETOR" type="string"></SimpleField>
 	<SimpleField name="QUADRA" type="string"></SimpleField>
-	<SimpleField name="LOTE" type="string"></SimpleField>
 	<SimpleField name="CGL" type="string"></SimpleField>
 	<SimpleField name="MATRICULA" type="string"></SimpleField>
 	<SimpleField name="OBS_SMF" type="string"></SimpleField>
@@ -12,12 +12,12 @@
 	<SimpleField name="AREA_RTM_M2" type="float"></SimpleField>
 </Schema>
 <Folder><name>LOTES_MONTE_HOREBE</name>
-  <Placemark id="LOTES_MONTE_HOREBE.1">
+  <Placemark>
+	<name>2214</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">2214</SimpleData>
 		<SimpleData name="CGL">6204062214</SimpleData>
 		<SimpleData name="MATRICULA">777783762</SimpleData>
 		<SimpleData name="OBS_SMF">Registro 24.148 desmembrou do Reg. 23.043</SimpleData>
@@ -26,12 +26,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9751779061003,-2.95600066103921 -59.9763507070908,-2.94688763656554 -59.9760725221162,-2.94679525306023 -59.9749072833529,-2.95584949648205 -59.9751779061003,-2.95600066103921</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.2">
+  <Placemark>
+	<name>1580</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">1580</SimpleData>
 		<SimpleData name="CGL">6204061580</SimpleData>
 		<SimpleData name="MATRICULA">777820043</SimpleData>
 		<SimpleData name="OBS_SMF">DESMEMBRADO DA MAT. 423083</SimpleData>
@@ -40,12 +40,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9740858088772,-2.9615140437728 -59.9777601120334,-2.96289511296001 -59.9766293744673,-2.96614069550287 -59.9781423610246,-2.96704213161655 -59.978916301686,-2.96750016451334 -59.9801764717834,-2.96373638783418 -59.9802285839718,-2.96360141277337 -59.9806721203784,-2.9621956705515 -59.9821048237301,-2.96267549294182 -59.9832638857268,-2.9595285441135 -59.9833052823494,-2.95939451015908 -59.9829275601359,-2.95888590621753 -59.982906788697,-2.95870533437905 -59.9822902588479,-2.95869062626535 -59.981920097731,-2.95890318225038 -59.981029468421,-2.95896501759399 -59.9807638931374,-2.95886442760198 -59.9808745003883,-2.95866654061503 -59.9806747279561,-2.95836022663935 -59.980417489672,-2.9581479106276 -59.980127815715,-2.95790386486115 -59.9799860195885,-2.95775614942766 -59.9793453531369,-2.95709446469953 -59.9791739407281,-2.95680975046834 -59.978466582787,-2.95676701271156 -59.9774028772866,-2.95609544212747 -59.9766793133079,-2.95644615654385 -59.9765595784573,-2.95650419246511 -59.9760412809476,-2.95648292912864 -59.9759899393924,-2.95645425017889 -59.975719151816,-2.956302991764 -59.9754485289214,-2.95615182643465 -59.9751779061003,-2.95600066103921 -59.9749072833529,-2.95584949648205 -59.9740858088772,-2.9615140437728</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.3">
+  <Placemark>
+	<name>1199</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">1199</SimpleData>
 		<SimpleData name="CGL">6204061199</SimpleData>
 		<SimpleData name="MATRICULA">777817175</SimpleData>
 		<SimpleData name="OBS_SMF">REGISTRO 108544 - 2ºOF</SimpleData>
@@ -54,12 +54,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9816029399888,-2.96408711122995 -59.9821048237301,-2.96267549294182 -59.9806721203784,-2.9621956705515 -59.9802285839718,-2.96360141277337 -59.9816029399888,-2.96408711122995</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.4">
+  <Placemark>
+	<name>1198</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">1198</SimpleData>
 		<SimpleData name="CGL">6204061198</SimpleData>
 		<SimpleData name="MATRICULA">777817174</SimpleData>
 		<SimpleData name="OBS_SMF">REGISTRO 108545 - 2ºOF</SimpleData>
@@ -68,12 +68,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9815553731675,-2.9642236762783 -59.9816029399888,-2.96408711122995 -59.9802285839718,-2.96360141277337 -59.9801764717834,-2.96373638783418 -59.9802998629494,-2.96377479596817 -59.9803064770798,-2.96377492902577 -59.9809029589706,-2.96397911906846 -59.9815553731675,-2.9642236762783</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.5">
+  <Placemark>
+	<name>0565</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">0565</SimpleData>
 		<SimpleData name="CGL">6204060565</SimpleData>
 		<SimpleData name="MATRICULA">777781306</SimpleData>
 		<SimpleData name="OBS_SMF">Lote 101/3</SimpleData>
@@ -82,12 +82,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9812000014447,-2.95569831196493 -59.980916059192,-2.95642664872078 -59.9806838820659,-2.95691658341775 -59.9802138304213,-2.95678994713855 -59.9799860195885,-2.95775614942766 -59.980127815715,-2.95790386486115 -59.980417489672,-2.9581479106276 -59.980750042403,-2.95693820486279 -59.9810220366637,-2.95647793622276 -59.9812701169466,-2.95571466108682 -59.9812000014447,-2.95569831196493</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.6">
+  <Placemark>
+	<name>2000</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">2000</SimpleData>
 		<SimpleData name="CGL">6204062000</SimpleData>
 		<SimpleData name="MATRICULA">0</SimpleData>
 		<SimpleData name="OBS_SMF">Registro 12.081/Remanescente / (TRAMITADO)</SimpleData>
@@ -96,12 +96,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9766793133079,-2.95644615654385 -59.9774028772866,-2.95609544212747 -59.9782983261302,-2.94753442496898 -59.9776124713812,-2.94730665893857 -59.9766793133079,-2.95644615654385</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.7">
+  <Placemark>
+	<name>1194</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">1194</SimpleData>
 		<SimpleData name="CGL">6204061194</SimpleData>
 		<SimpleData name="MATRICULA">777817170</SimpleData>
 		<SimpleData name="OBS_SMF">REGISTRO 108625 - 2º OF</SimpleData>
@@ -110,12 +110,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9802998629494,-2.96377479596817 -59.9801764717834,-2.96373638783418 -59.978916301686,-2.96750016451334 -59.9794907318618,-2.96779993108359 -59.9802763357956,-2.96567349572913 -59.9796800024391,-2.96546914256798 -59.9803064770798,-2.96377492902577 -59.9802998629494,-2.96377479596817</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.8">
+  <Placemark>
+	<name>1197</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">1197</SimpleData>
 		<SimpleData name="CGL">6204061197</SimpleData>
 		<SimpleData name="MATRICULA">777817173</SimpleData>
 		<SimpleData name="OBS_SMF">REGISTRO 108623 - 2º OF</SimpleData>
@@ -124,12 +124,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9809029589706,-2.96397911906846 -59.9802763357956,-2.96567349572913 -59.9808646885997,-2.96589310390354 -59.9814901632156,-2.96419935993548 -59.9809029589706,-2.96397911906846</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.9">
+  <Placemark>
+	<name>0520</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">0520</SimpleData>
 		<SimpleData name="CGL">6204060520</SimpleData>
 		<SimpleData name="MATRICULA">777785738</SimpleData>
 		<SimpleData name="OBS_SMF">Lote 101/4 -2018.11209.15294.0.060891</SimpleData>
@@ -138,12 +138,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9812000014447,-2.95569831196493 -59.9796341470534,-2.95536193211241 -59.9794570746659,-2.95696107519117 -59.9793453531369,-2.95709446469953 -59.9799860195885,-2.95775614942766 -59.9802138304213,-2.95678994713855 -59.9806838820659,-2.95691658341775 -59.980916059192,-2.95642664872078 -59.9812000014447,-2.95569831196493</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.10">
+  <Placemark>
+	<name>1195</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">1195</SimpleData>
 		<SimpleData name="CGL">6204061195</SimpleData>
 		<SimpleData name="MATRICULA">777817171</SimpleData>
 		<SimpleData name="OBS_SMF">REGISTRO 108622 - 2º OF</SimpleData>
@@ -152,12 +152,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9815553731675,-2.9642236762783 -59.9814901632156,-2.96419935993548 -59.9808646885997,-2.96589310390354 -59.9802763357956,-2.96567349572913 -59.9794907318618,-2.96779993108359 -59.9800971031633,-2.96816016274662 -59.9815553731675,-2.9642236762783</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.11">
+  <Placemark>
+	<name>0602</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">0602</SimpleData>
 		<SimpleData name="CGL">6204060602</SimpleData>
 		<SimpleData name="MATRICULA">777781305</SimpleData>
 		<SimpleData name="OBS_SMF">Lote 101/2</SimpleData>
@@ -166,12 +166,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9813402189591,-2.95573094509084 -59.9812701016549,-2.95571466922571 -59.9810220366637,-2.95647793622276 -59.980750042403,-2.95693820486279 -59.980417489672,-2.9581479106276 -59.9806747279561,-2.95836022663935 -59.980864003533,-2.95811652395329 -59.9810802022018,-2.95702718321109 -59.9813402189591,-2.95573094509084</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.12">
+  <Placemark>
+	<name>2112</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">2112</SimpleData>
 		<SimpleData name="CGL">6204062112</SimpleData>
 		<SimpleData name="MATRICULA">0</SimpleData>
 		<SimpleData name="OBS_SMF">Reg. 24.147 desmembrou Reg. 23.043/EM ANDAMENTO</SimpleData>
@@ -180,12 +180,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.975719151816,-2.956302991764 -59.9759899393924,-2.95645425017889 -59.9771854331969,-2.94716484273708 -59.9769070762796,-2.94707240246301 -59.975719151816,-2.956302991764</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.13">
+  <Placemark>
+	<name>2146</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">2146</SimpleData>
 		<SimpleData name="CGL">6204062146</SimpleData>
 		<SimpleData name="MATRICULA">0</SimpleData>
 		<SimpleData name="OBS_SMF">Reg. 24.146 desmembrou Reg. 23.043/(TRAMITADO)</SimpleData>
@@ -194,12 +194,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.975719151816,-2.956302991764 -59.9769070762796,-2.94707240246301 -59.9766288912122,-2.94698001909689 -59.9754485289214,-2.95615182643465 -59.975719151816,-2.956302991764</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.14">
+  <Placemark>
+	<name>2180</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">2180</SimpleData>
 		<SimpleData name="CGL">6204062180</SimpleData>
 		<SimpleData name="MATRICULA">0</SimpleData>
 		<SimpleData name="OBS_SMF">Reg. 24.145 desmembrou Reg. 23.043/(TRAMITADO)</SimpleData>
@@ -208,12 +208,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9754485289214,-2.95615182643465 -59.9766288912122,-2.94698001909689 -59.9763507070908,-2.94688763656554 -59.9751779061003,-2.95600066103921 -59.9754485289214,-2.95615182643465</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.15">
+  <Placemark>
+	<name>2078</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">2078</SimpleData>
 		<SimpleData name="CGL">6204062078</SimpleData>
 		<SimpleData name="MATRICULA">0</SimpleData>
 		<SimpleData name="OBS_SMF">Demembrado do Registro 12.081/ (TRAMITADO)</SimpleData>
@@ -222,12 +222,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9766793133079,-2.95644615654385 -59.9776124713812,-2.94730665893857 -59.9771854331969,-2.94716484273708 -59.9759899393924,-2.95645425017889 -59.9760412809476,-2.95648292912864 -59.9765595784573,-2.95650419246511 -59.9766793133079,-2.95644615654385</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.16">
+  <Placemark>
+	<name>1196</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">1196</SimpleData>
 		<SimpleData name="CGL">6204061196</SimpleData>
 		<SimpleData name="MATRICULA">777817172</SimpleData>
 		<SimpleData name="OBS_SMF">REGISTRO 108624 - 2º OF</SimpleData>
@@ -236,12 +236,12 @@
 	</SchemaData></ExtendedData>
       <Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9802763259039,-2.96567332390251 -59.9802763357956,-2.96567349572913 -59.9809029490789,-2.96397894724186 -59.9803064671881,-2.96377475719915 -59.9796799925476,-2.96546897074136 -59.9802763259039,-2.96567332390251</coordinates></LinearRing></outerBoundaryIs></Polygon>
   </Placemark>
-  <Placemark id="LOTES_MONTE_HOREBE.17">
+  <Placemark>
+	<name>1200</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#LOTES_MONTE_HOREBE">
 		<SimpleData name="SETOR">62</SimpleData>
 		<SimpleData name="QUADRA">0406</SimpleData>
-		<SimpleData name="LOTE">1200</SimpleData>
 		<SimpleData name="CGL">6204061200</SimpleData>
 		<SimpleData name="MATRICULA">423083</SimpleData>
 		<SimpleData name="OBS_SMF">REMANESCENTE</SimpleData>

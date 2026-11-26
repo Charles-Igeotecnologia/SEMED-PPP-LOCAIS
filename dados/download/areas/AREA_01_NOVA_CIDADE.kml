@@ -14,7 +14,7 @@
 	<SimpleField name="TIPO" type="string"></SimpleField>
 </Schema>
 <Folder><name>AREA_01_NOVA_CIDADE</name>
-  <Placemark id="AREA_01_NOVA_CIDADE.1">
+  <Placemark>
 	<name>Área 01 · Nova Cidade (Polígono)</name>
 	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
 	<ExtendedData><SchemaData schemaUrl="#AREA_01_NOVA_CIDADE">
@@ -25,13 +25,11 @@
 		<SimpleData name="ENDERECO">Acesso pela Rua Saracura Mira, S/N</SimpleData>
 		<SimpleData name="CEP">69017-350</SimpleData>
 		<SimpleData name="AREA_RTM_M2">22500</SimpleData>
-		<SimpleData name="MATRICULA_RI"></SimpleData>
-		<SimpleData name="INSCR_IMOB"></SimpleData>
 		<SimpleData name="TIPO">Polígono</SimpleData>
 	</SchemaData></ExtendedData>
       <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9753390714189,-2.98564870328136 -59.9740108848771,-2.98588773297029 -59.9742486409784,-2.98722303150317 -59.9755768290777,-2.98698400154468 -59.9753390714189,-2.98564870328136</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
   </Placemark>
-  <Placemark id="AREA_01_NOVA_CIDADE.2">
+  <Placemark>
 	<name>Área 01 · Nova Cidade (Ponto)</name>
 	<ExtendedData><SchemaData schemaUrl="#AREA_01_NOVA_CIDADE">
 		<SimpleData name="AREA_ID">AREA_01</SimpleData>
