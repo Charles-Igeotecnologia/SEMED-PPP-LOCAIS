@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="AREAS_PPP" id="AREAS_PPP">
+	<SimpleField name="AREA_ID" type="string"></SimpleField>
+	<SimpleField name="NOME" type="string"></SimpleField>
+	<SimpleField name="EMPREEND" type="string"></SimpleField>
+	<SimpleField name="REFERENCIA" type="string"></SimpleField>
+	<SimpleField name="BAIRRO" type="string"></SimpleField>
+	<SimpleField name="ENDERECO" type="string"></SimpleField>
+	<SimpleField name="CEP" type="string"></SimpleField>
+	<SimpleField name="ZONA" type="string"></SimpleField>
+	<SimpleField name="TITULAR_CAD" type="string"></SimpleField>
+	<SimpleField name="INSCR_IMOB" type="string"></SimpleField>
+	<SimpleField name="MATRICULA_RI" type="string"></SimpleField>
+	<SimpleField name="REF_CADASTRAL" type="string"></SimpleField>
+	<SimpleField name="AREA_RTM_M2" type="float"></SimpleField>
+	<SimpleField name="AREA_HA" type="float"></SimpleField>
+	<SimpleField name="PERIM_RTM_M" type="float"></SimpleField>
+	<SimpleField name="FUSO_UTM" type="string"></SimpleField>
+	<SimpleField name="LAT" type="float"></SimpleField>
+	<SimpleField name="LON" type="float"></SimpleField>
+	<SimpleField name="E_UTM20" type="float"></SimpleField>
+	<SimpleField name="N_UTM20" type="float"></SimpleField>
+	<SimpleField name="E_RTM" type="float"></SimpleField>
+	<SimpleField name="N_RTM" type="float"></SimpleField>
+	<SimpleField name="CAMT" type="string"></SimpleField>
+	<SimpleField name="GABARITO_M" type="string"></SimpleField>
+	<SimpleField name="DENSIDADE" type="string"></SimpleField>
+	<SimpleField name="VERTICALIZ" type="string"></SimpleField>
+	<SimpleField name="USOS" type="string"></SimpleField>
+	<SimpleField name="SITUACAO" type="string"></SimpleField>
+	<SimpleField name="FONTE" type="string"></SimpleField>
+	<SimpleField name="DATA_VALIDACAO" type="string"></SimpleField>
+</Schema>
+<Folder><name>AREAS_PPP</name>
+  <Placemark id="AREAS_PPP.1">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AREAS_PPP">
+		<SimpleData name="AREA_ID">AREA_01</SimpleData>
+		<SimpleData name="NOME">Área 01</SimpleData>
+		<SimpleData name="EMPREEND">Modelo inovador – “Tucandeira”</SimpleData>
+		<SimpleData name="REFERENCIA">Próxima à Comunidade Itaporanga</SimpleData>
+		<SimpleData name="BAIRRO">Nova Cidade</SimpleData>
+		<SimpleData name="ENDERECO">Acesso pela Rua Saracura Mira, S/N</SimpleData>
+		<SimpleData name="CEP">69017-350</SimpleData>
+		<SimpleData name="ZONA">Zona Norte</SimpleData>
+		<SimpleData name="TITULAR_CAD">MUNICIPIO DE MANAUS</SimpleData>
+		<SimpleData name="INSCR_IMOB"></SimpleData>
+		<SimpleData name="MATRICULA_RI"></SimpleData>
+		<SimpleData name="REF_CADASTRAL">Planta: Lote 33 · Gleba 03</SimpleData>
+		<SimpleData name="AREA_RTM_M2">22500</SimpleData>
+		<SimpleData name="AREA_HA">2.25</SimpleData>
+		<SimpleData name="PERIM_RTM_M">600</SimpleData>
+		<SimpleData name="FUSO_UTM">21</SimpleData>
+		<SimpleData name="LAT">-2.986436</SimpleData>
+		<SimpleData name="LON">-59.974794</SimpleData>
+		<SimpleData name="E_UTM20">836332.09</SimpleData>
+		<SimpleData name="N_UTM20">9669443.18</SimpleData>
+		<SimpleData name="E_RTM">402802.14</SimpleData>
+		<SimpleData name="N_RTM">4669775.63</SimpleData>
+		<SimpleData name="CAMT">3,0*</SimpleData>
+		<SimpleData name="GABARITO_M">8</SimpleData>
+		<SimpleData name="DENSIDADE">MÉDIA</SimpleData>
+		<SimpleData name="VERTICALIZ">BAIXA</SimpleData>
+		<SimpleData name="USOS">1,2,3**</SimpleData>
+		<SimpleData name="SITUACAO">Preliminar</SimpleData>
+		<SimpleData name="FONTE">SEMED/DGTI · LOTES.gdb (Território 01) + Relação de Áreas e Endereços</SimpleData>
+		<SimpleData name="DATA_VALIDACAO">2026-11-26</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9753390714189,-2.98564870328136 -59.9740108848771,-2.98588773297029 -59.9742486409784,-2.98722303150317 -59.9755768290777,-2.98698400154468 -59.9753390714189,-2.98564870328136</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="AREAS_PPP.2">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AREAS_PPP">
+		<SimpleData name="AREA_ID">AREA_02</SimpleData>
+		<SimpleData name="NOME">Área 02</SimpleData>
+		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
+		<SimpleData name="REFERENCIA">Próxima ao Loteamento Viver Melhor</SimpleData>
+		<SimpleData name="BAIRRO">Lago Azul</SimpleData>
+		<SimpleData name="ENDERECO">Rua Raio de Luz, S/N</SimpleData>
+		<SimpleData name="CEP">69018-688</SimpleData>
+		<SimpleData name="ZONA">Zona Norte</SimpleData>
+		<SimpleData name="TITULAR_CAD">MUNICIPIO DE MANAUS</SimpleData>
+		<SimpleData name="INSCR_IMOB">777817175</SimpleData>
+		<SimpleData name="MATRICULA_RI">108.544 · 1º Ofício de Registro de Imóveis</SimpleData>
+		<SimpleData name="REF_CADASTRAL">Cadastro imobiliário municipal: Setor 62 · Quadra 0406 · Lote 1199</SimpleData>
+		<SimpleData name="AREA_RTM_M2">27109.98</SimpleData>
+		<SimpleData name="AREA_HA">2.711</SimpleData>
+		<SimpleData name="PERIM_RTM_M">658.67</SimpleData>
+		<SimpleData name="FUSO_UTM">21</SimpleData>
+		<SimpleData name="LAT">-2.963136</SimpleData>
+		<SimpleData name="LON">-59.981155</SimpleData>
+		<SimpleData name="E_UTM20">835631.23</SimpleData>
+		<SimpleData name="N_UTM20">9672024.08</SimpleData>
+		<SimpleData name="E_RTM">402094.97</SimpleData>
+		<SimpleData name="N_RTM">4672352.03</SimpleData>
+		<SimpleData name="CAMT">1,00</SimpleData>
+		<SimpleData name="GABARITO_M">4</SimpleData>
+		<SimpleData name="DENSIDADE">BAIXA</SimpleData>
+		<SimpleData name="VERTICALIZ">HORIZONTAL</SimpleData>
+		<SimpleData name="USOS">1,2,3**</SimpleData>
+		<SimpleData name="SITUACAO">Preliminar</SimpleData>
+		<SimpleData name="FONTE">SEMED/DGTI · LOTES.gdb (Território 01) + Relação de Áreas e Endereços</SimpleData>
+		<SimpleData name="DATA_VALIDACAO">2026-11-26</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9816029399888,-2.9640871112299 -59.9821048237301,-2.96267549294182 -59.9806721203784,-2.96219567055148 -59.9802285839717,-2.96360141277332 -59.9816029399888,-2.9640871112299</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="AREAS_PPP.3">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AREAS_PPP">
+		<SimpleData name="AREA_ID">AREA_03</SimpleData>
+		<SimpleData name="NOME">Área 03</SimpleData>
+		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
+		<SimpleData name="REFERENCIA">Ao lado do Parque Mosaico</SimpleData>
+		<SimpleData name="BAIRRO">Planalto</SimpleData>
+		<SimpleData name="ENDERECO">Rua Camila, S/N</SimpleData>
+		<SimpleData name="CEP">69044-232</SimpleData>
+		<SimpleData name="ZONA">Zona Centro-Oeste</SimpleData>
+		<SimpleData name="TITULAR_CAD">MUNICIPIO DE MANAUS-PMM</SimpleData>
+		<SimpleData name="INSCR_IMOB">777790580</SimpleData>
+		<SimpleData name="MATRICULA_RI"></SimpleData>
+		<SimpleData name="REF_CADASTRAL">Planta: Loteamento Cidade Jardim</SimpleData>
+		<SimpleData name="AREA_RTM_M2">13261.79</SimpleData>
+		<SimpleData name="AREA_HA">1.3262</SimpleData>
+		<SimpleData name="PERIM_RTM_M">549.56</SimpleData>
+		<SimpleData name="FUSO_UTM">20</SimpleData>
+		<SimpleData name="LAT">-3.061405</SimpleData>
+		<SimpleData name="LON">-60.063729</SimpleData>
+		<SimpleData name="E_UTM20">826413.28</SimpleData>
+		<SimpleData name="N_UTM20">9661172.55</SimpleData>
+		<SimpleData name="E_RTM">392915.76</SimpleData>
+		<SimpleData name="N_RTM">4661485.61</SimpleData>
+		<SimpleData name="CAMT">3,0*</SimpleData>
+		<SimpleData name="GABARITO_M">8</SimpleData>
+		<SimpleData name="DENSIDADE">MÉDIA</SimpleData>
+		<SimpleData name="VERTICALIZ">BAIXA</SimpleData>
+		<SimpleData name="USOS">1,2,3**</SimpleData>
+		<SimpleData name="SITUACAO">Preliminar</SimpleData>
+		<SimpleData name="FONTE">SEMED/DGTI · LOTES.gdb (Território 01) + Relação de Áreas e Endereços</SimpleData>
+		<SimpleData name="DATA_VALIDACAO">2026-11-26</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-60.0635588682586,-3.06239822861922 -60.0636760810962,-3.06242982043639 -60.063701766465,-3.06243189799794 -60.0637452707185,-3.06242890472213 -60.0637621460973,-3.06242670524486 -60.0637804454786,-3.0624235452651 -60.0638065846902,-3.062417972017 -60.0638272534351,-3.06241193697399 -60.063840796628,-3.06240831244312 -60.0638695362712,-3.06239771267437 -60.0638921758251,-3.06238824460893 -60.0639328641861,-3.06236743675243 -60.0639581193338,-3.06235075183568 -60.0639726001082,-3.06233541232922 -60.0639844202689,-3.06231147625465 -60.0639915184539,-3.06225722583001 -60.064043480558,-3.06049462405035 -60.0634524451506,-3.06048554623464 -60.0634490397863,-3.06064695800629 -60.0634437105974,-3.06078470854245 -60.0634393227508,-3.060898121221 -60.0634348665121,-3.06101115498173 -60.0634302843378,-3.06112432982799 -60.063425788398,-3.0612353658869 -60.0634160897155,-3.06146220667064 -60.0634111728051,-3.06157395176231 -60.0634062271456,-3.0616863570292 -60.0634012284798,-3.06179996236821 -60.0633962837554,-3.06191299886913 -60.0633914344051,-3.06202633922493 -60.0635717118944,-3.06203397113996 -60.0635588682586,-3.06239822861922</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="AREAS_PPP.4">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AREAS_PPP">
+		<SimpleData name="AREA_ID">AREA_04</SimpleData>
+		<SimpleData name="NOME">Área 04</SimpleData>
+		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
+		<SimpleData name="REFERENCIA">Próxima à Escola São José</SimpleData>
+		<SimpleData name="BAIRRO">Compensa</SimpleData>
+		<SimpleData name="ENDERECO">Travessa Pina de Moraes / Antiga Travessa São José, S/N</SimpleData>
+		<SimpleData name="CEP">69035-030</SimpleData>
+		<SimpleData name="ZONA">Zona Oeste</SimpleData>
+		<SimpleData name="TITULAR_CAD">AGUAS DO AMAZONAS S/A</SimpleData>
+		<SimpleData name="INSCR_IMOB">349056</SimpleData>
+		<SimpleData name="MATRICULA_RI"></SimpleData>
+		<SimpleData name="REF_CADASTRAL"></SimpleData>
+		<SimpleData name="AREA_RTM_M2">21479.23</SimpleData>
+		<SimpleData name="AREA_HA">2.1479</SimpleData>
+		<SimpleData name="PERIM_RTM_M">880.81</SimpleData>
+		<SimpleData name="FUSO_UTM">20</SimpleData>
+		<SimpleData name="LAT">-3.110914</SimpleData>
+		<SimpleData name="LON">-60.060102</SimpleData>
+		<SimpleData name="E_UTM20">826801.75</SimpleData>
+		<SimpleData name="N_UTM20">9655691.81</SimpleData>
+		<SimpleData name="E_RTM">393319.33</SimpleData>
+		<SimpleData name="N_RTM">4656011.05</SimpleData>
+		<SimpleData name="CAMT">2,0</SimpleData>
+		<SimpleData name="GABARITO_M">8</SimpleData>
+		<SimpleData name="DENSIDADE">BAIXA</SimpleData>
+		<SimpleData name="VERTICALIZ">BAIXA</SimpleData>
+		<SimpleData name="USOS">1,2,3**</SimpleData>
+		<SimpleData name="SITUACAO">Preliminar</SimpleData>
+		<SimpleData name="FONTE">SEMED/DGTI · LOTES.gdb (Território 01) + Relação de Áreas e Endereços</SimpleData>
+		<SimpleData name="DATA_VALIDACAO">2026-11-26</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-60.0588449053477,-3.11213714301494 -60.059107619125,-3.11193476095478 -60.0591968743598,-3.11183067105885 -60.0593218591934,-3.11111301678603 -60.0593819304708,-3.11108273291258 -60.0609335429566,-3.1112802092266 -60.0609517180759,-3.1110447597355 -60.0609594186275,-3.11096061977225 -60.0609651772098,-3.11089816615642 -60.0611909377569,-3.11087485615121 -60.0611908996496,-3.11086926096015 -60.0611905530489,-3.11081827391125 -60.0611874506503,-3.11070117294566 -60.0612209016635,-3.11069855200829 -60.061223738474,-3.11053146745196 -60.0612241067535,-3.11052583280183 -60.0607911447575,-3.11003798918949 -60.0605834467788,-3.11019731318066 -60.0601628372402,-3.11046317370189 -60.0598005208702,-3.11051552441672 -60.0595359994063,-3.11061643379466 -60.0594396954501,-3.11066946562176 -60.0594299679825,-3.11067475569644 -60.0593575249252,-3.11067708396402 -60.0593480023401,-3.11069427794292 -60.0593218624554,-3.11074147366026 -60.0593007150451,-3.11077965547073 -60.059274043525,-3.11082781163311 -60.0592149361896,-3.11093453331223 -60.0590412194936,-3.11124818411713 -60.0589726605788,-3.11137196772005 -60.0589076224734,-3.11148939718069 -60.0588829677014,-3.11153391141561 -60.0589881090059,-3.11159615351085 -60.0589461897605,-3.11166505985337 -60.0589215158706,-3.11170555426884 -60.0588830773064,-3.11174194191271 -60.0586506107024,-3.11196200600405 -60.058685351659,-3.11202312483229 -60.0588449053477,-3.11213714301494</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="AREAS_PPP.5">
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AREAS_PPP">
+		<SimpleData name="AREA_ID">AREA_05</SimpleData>
+		<SimpleData name="NOME">Área 05</SimpleData>
+		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
+		<SimpleData name="REFERENCIA">Próxima à Vila Militar da Marinha</SimpleData>
+		<SimpleData name="BAIRRO">Vila Buriti</SimpleData>
+		<SimpleData name="ENDERECO">Acesso pela Rua Marinheiro Greenhalgh, S/N</SimpleData>
+		<SimpleData name="CEP">69074-160</SimpleData>
+		<SimpleData name="ZONA">Zona Sul</SimpleData>
+		<SimpleData name="TITULAR_CAD">MARINHA E SIDERAMA</SimpleData>
+		<SimpleData name="INSCR_IMOB"></SimpleData>
+		<SimpleData name="MATRICULA_RI"></SimpleData>
+		<SimpleData name="REF_CADASTRAL"></SimpleData>
+		<SimpleData name="AREA_RTM_M2">4600</SimpleData>
+		<SimpleData name="AREA_HA">0.46</SimpleData>
+		<SimpleData name="PERIM_RTM_M">292</SimpleData>
+		<SimpleData name="FUSO_UTM">21</SimpleData>
+		<SimpleData name="LAT">-3.136585</SimpleData>
+		<SimpleData name="LON">-59.944237</SimpleData>
+		<SimpleData name="E_UTM20">839685.12</SimpleData>
+		<SimpleData name="N_UTM20">9652813.61</SimpleData>
+		<SimpleData name="E_RTM">406198.24</SimpleData>
+		<SimpleData name="N_RTM">4653172.44</SimpleData>
+		<SimpleData name="CAMT">1,0</SimpleData>
+		<SimpleData name="GABARITO_M">4</SimpleData>
+		<SimpleData name="DENSIDADE">BAIXA</SimpleData>
+		<SimpleData name="VERTICALIZ">HORIZONTAL</SimpleData>
+		<SimpleData name="USOS">1,2,3,4**</SimpleData>
+		<SimpleData name="SITUACAO">Preliminar</SimpleData>
+		<SimpleData name="FONTE">SEMED/DGTI · LOTES.gdb (Território 01) + Relação de Áreas e Endereços</SimpleData>
+		<SimpleData name="DATA_VALIDACAO">2026-11-26</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-59.944467274812,-3.13614467620476 -59.943754350724,-3.1366962832842 -59.944006774542,-3.13702593745486 -59.9447196987272,-3.13647433020774 -59.944467274812,-3.13614467620476</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+</Folder>
+</Document></kml>
