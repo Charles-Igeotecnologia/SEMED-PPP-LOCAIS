@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="AREA_05_VILA_BURITI" id="AREA_05_VILA_BURITI">
+	<SimpleField name="AREA_ID" type="string"></SimpleField>
+	<SimpleField name="NOME" type="string"></SimpleField>
+	<SimpleField name="EMPREEND" type="string"></SimpleField>
+	<SimpleField name="BAIRRO" type="string"></SimpleField>
+	<SimpleField name="ENDERECO" type="string"></SimpleField>
+	<SimpleField name="CEP" type="string"></SimpleField>
+	<SimpleField name="AREA_RTM_M2" type="float"></SimpleField>
+	<SimpleField name="MATRICULA_RI" type="string"></SimpleField>
+	<SimpleField name="INSCR_IMOB" type="string"></SimpleField>
+	<SimpleField name="TIPO" type="string"></SimpleField>
+</Schema>
+<Folder><name>AREA_05_VILA_BURITI</name>
+  <Placemark id="AREA_05_VILA_BURITI.1">
+	<name>Área 05 · Vila Buriti (Polígono)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AREA_05_VILA_BURITI">
+		<SimpleData name="AREA_ID">AREA_05</SimpleData>
+		<SimpleData name="NOME">Área 05</SimpleData>
+		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
+		<SimpleData name="BAIRRO">Vila Buriti</SimpleData>
+		<SimpleData name="ENDERECO">Acesso pela Rua Marinheiro Greenhalgh, S/N</SimpleData>
+		<SimpleData name="CEP">69074-160</SimpleData>
+		<SimpleData name="AREA_RTM_M2">4600</SimpleData>
+		<SimpleData name="MATRICULA_RI"></SimpleData>
+		<SimpleData name="INSCR_IMOB"></SimpleData>
+		<SimpleData name="TIPO">Polígono</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-59.944467274812,-3.13614467620476 -59.943754350724,-3.1366962832842 -59.944006774542,-3.13702593745486 -59.9447196987272,-3.13647433020774 -59.944467274812,-3.13614467620476</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="AREA_05_VILA_BURITI.2">
+	<name>Área 05 · Vila Buriti (Ponto)</name>
+	<ExtendedData><SchemaData schemaUrl="#AREA_05_VILA_BURITI">
+		<SimpleData name="AREA_ID">AREA_05</SimpleData>
+		<SimpleData name="NOME">Área 05</SimpleData>
+		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
+		<SimpleData name="BAIRRO">Vila Buriti</SimpleData>
+		<SimpleData name="ENDERECO">Acesso pela Rua Marinheiro Greenhalgh, S/N</SimpleData>
+		<SimpleData name="CEP">69074-160</SimpleData>
+		<SimpleData name="TIPO">Ponto</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-59.9443299622269,-3.13649295044418</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="AREA_01_NOVA_CIDADE" id="AREA_01_NOVA_CIDADE">
+	<SimpleField name="AREA_ID" type="string"></SimpleField>
+	<SimpleField name="NOME" type="string"></SimpleField>
+	<SimpleField name="EMPREEND" type="string"></SimpleField>
+	<SimpleField name="BAIRRO" type="string"></SimpleField>
+	<SimpleField name="ENDERECO" type="string"></SimpleField>
+	<SimpleField name="CEP" type="string"></SimpleField>
+	<SimpleField name="AREA_RTM_M2" type="float"></SimpleField>
+	<SimpleField name="MATRICULA_RI" type="string"></SimpleField>
+	<SimpleField name="INSCR_IMOB" type="string"></SimpleField>
+	<SimpleField name="TIPO" type="string"></SimpleField>
+</Schema>
+<Folder><name>AREA_01_NOVA_CIDADE</name>
+  <Placemark id="AREA_01_NOVA_CIDADE.1">
+	<name>Área 01 · Nova Cidade (Polígono)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AREA_01_NOVA_CIDADE">
+		<SimpleData name="AREA_ID">AREA_01</SimpleData>
+		<SimpleData name="NOME">Área 01</SimpleData>
+		<SimpleData name="EMPREEND">Modelo inovador – “Tucandeira”</SimpleData>
+		<SimpleData name="BAIRRO">Nova Cidade</SimpleData>
+		<SimpleData name="ENDERECO">Acesso pela Rua Saracura Mira, S/N</SimpleData>
+		<SimpleData name="CEP">69017-350</SimpleData>
+		<SimpleData name="AREA_RTM_M2">22500</SimpleData>
+		<SimpleData name="MATRICULA_RI"></SimpleData>
+		<SimpleData name="INSCR_IMOB"></SimpleData>
+		<SimpleData name="TIPO">Polígono</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9753390714189,-2.98564870328136 -59.9740108848771,-2.98588773297029 -59.9742486409784,-2.98722303150317 -59.9755768290777,-2.98698400154468 -59.9753390714189,-2.98564870328136</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="AREA_01_NOVA_CIDADE.2">
+	<name>Área 01 · Nova Cidade (Ponto)</name>
+	<ExtendedData><SchemaData schemaUrl="#AREA_01_NOVA_CIDADE">
+		<SimpleData name="AREA_ID">AREA_01</SimpleData>
+		<SimpleData name="NOME">Área 01</SimpleData>
+		<SimpleData name="EMPREEND">Modelo inovador – “Tucandeira”</SimpleData>
+		<SimpleData name="BAIRRO">Nova Cidade</SimpleData>
+		<SimpleData name="ENDERECO">Acesso pela Rua Saracura Mira, S/N</SimpleData>
+		<SimpleData name="CEP">69017-350</SimpleData>
+		<SimpleData name="TIPO">Ponto</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-59.9750547506176,-2.98646365081519</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

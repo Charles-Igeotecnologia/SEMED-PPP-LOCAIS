@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="AREA_02_LAGO_AZUL" id="AREA_02_LAGO_AZUL">
+	<SimpleField name="AREA_ID" type="string"></SimpleField>
+	<SimpleField name="NOME" type="string"></SimpleField>
+	<SimpleField name="EMPREEND" type="string"></SimpleField>
+	<SimpleField name="BAIRRO" type="string"></SimpleField>
+	<SimpleField name="ENDERECO" type="string"></SimpleField>
+	<SimpleField name="CEP" type="string"></SimpleField>
+	<SimpleField name="AREA_RTM_M2" type="float"></SimpleField>
+	<SimpleField name="MATRICULA_RI" type="string"></SimpleField>
+	<SimpleField name="INSCR_IMOB" type="string"></SimpleField>
+	<SimpleField name="TIPO" type="string"></SimpleField>
+</Schema>
+<Folder><name>AREA_02_LAGO_AZUL</name>
+  <Placemark id="AREA_02_LAGO_AZUL.1">
+	<name>Área 02 · Lago Azul (Polígono)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AREA_02_LAGO_AZUL">
+		<SimpleData name="AREA_ID">AREA_02</SimpleData>
+		<SimpleData name="NOME">Área 02</SimpleData>
+		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
+		<SimpleData name="BAIRRO">Lago Azul</SimpleData>
+		<SimpleData name="ENDERECO">Rua Raio de Luz, S/N</SimpleData>
+		<SimpleData name="CEP">69018-688</SimpleData>
+		<SimpleData name="AREA_RTM_M2">27109.98</SimpleData>
+		<SimpleData name="MATRICULA_RI">108.544 · 1º Ofício de Registro de Imóveis</SimpleData>
+		<SimpleData name="INSCR_IMOB">777817175</SimpleData>
+		<SimpleData name="TIPO">Polígono</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9816029399888,-2.9640871112299 -59.9821048237301,-2.96267549294182 -59.9806721203784,-2.96219567055148 -59.9802285839717,-2.96360141277332 -59.9816029399888,-2.9640871112299</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="AREA_02_LAGO_AZUL.2">
+	<name>Área 02 · Lago Azul (Ponto)</name>
+	<ExtendedData><SchemaData schemaUrl="#AREA_02_LAGO_AZUL">
+		<SimpleData name="AREA_ID">AREA_02</SimpleData>
+		<SimpleData name="NOME">Área 02</SimpleData>
+		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
+		<SimpleData name="BAIRRO">Lago Azul</SimpleData>
+		<SimpleData name="ENDERECO">Rua Raio de Luz, S/N</SimpleData>
+		<SimpleData name="CEP">69018-688</SimpleData>
+		<SimpleData name="TIPO">Ponto</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-59.9811598982449,-2.96307451697881</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>

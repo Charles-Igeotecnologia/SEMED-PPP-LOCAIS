@@ -6,7 +6,7 @@ Página única (`index.html`) em quatro abas:
 
 1. **Apresentação** — mapa interativo das áreas (fundo Imagem, Escuro ou Sem fundo), cartões por área, quadro comparativo, pontos de atenção e fluxo de dados.
 2. **SIG** — camadas, mapas base Esri (Híbrido, Imagem, Ruas, Escuro), ficha por área, rotas no Google Maps, coordenadas em Lat/Lon, RTM SEMEF e UTM 20S, medição no RTM e painel lateral recolhível.
-3. **Dados e arquivos** — camadas em GPKG (RTM SEMEF + UTM 20S), SHP (UTM 20S), GeoJSON e KML, quadro de áreas em CSV e pacote ZIP.
+3. **Dados e arquivos** — camadas em GPKG (RTM SEMEF + UTM 20S), Shapefile ZIP (UTM 20S), GeoJSON e KML; pacotes Shapefile e KML com todas as camadas; Shapefile e KML por área; quadro de áreas em CSV e pacote ZIP completo.
 4. **Relatório** — relatório de localização em A4 (visão geral e uma ficha por área), pronto para imprimir ou salvar em PDF.
 
 Referência espacial: base oficial em semef_SIR2000 (SIRGAS 2000 / TM MC −60, padrão SEMEF); cópia em SIRGAS 2000 / UTM 20S (EPSG:31980); web em WGS 84 (EPSG:4326). Áreas e perímetros calculados no RTM.

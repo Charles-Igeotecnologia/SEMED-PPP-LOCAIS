@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document id="root_doc">
+<Schema name="AREA_03_PLANALTO" id="AREA_03_PLANALTO">
+	<SimpleField name="AREA_ID" type="string"></SimpleField>
+	<SimpleField name="NOME" type="string"></SimpleField>
+	<SimpleField name="EMPREEND" type="string"></SimpleField>
+	<SimpleField name="BAIRRO" type="string"></SimpleField>
+	<SimpleField name="ENDERECO" type="string"></SimpleField>
+	<SimpleField name="CEP" type="string"></SimpleField>
+	<SimpleField name="AREA_RTM_M2" type="float"></SimpleField>
+	<SimpleField name="MATRICULA_RI" type="string"></SimpleField>
+	<SimpleField name="INSCR_IMOB" type="string"></SimpleField>
+	<SimpleField name="TIPO" type="string"></SimpleField>
+</Schema>
+<Folder><name>AREA_03_PLANALTO</name>
+  <Placemark id="AREA_03_PLANALTO.1">
+	<name>Área 03 · Planalto (Polígono)</name>
+	<Style><LineStyle><color>ff0000ff</color></LineStyle><PolyStyle><fill>0</fill></PolyStyle></Style>
+	<ExtendedData><SchemaData schemaUrl="#AREA_03_PLANALTO">
+		<SimpleData name="AREA_ID">AREA_03</SimpleData>
+		<SimpleData name="NOME">Área 03</SimpleData>
+		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
+		<SimpleData name="BAIRRO">Planalto</SimpleData>
+		<SimpleData name="ENDERECO">Rua Camila, S/N</SimpleData>
+		<SimpleData name="CEP">69044-232</SimpleData>
+		<SimpleData name="AREA_RTM_M2">13261.79</SimpleData>
+		<SimpleData name="MATRICULA_RI"></SimpleData>
+		<SimpleData name="INSCR_IMOB">777790580</SimpleData>
+		<SimpleData name="TIPO">Polígono</SimpleData>
+	</SchemaData></ExtendedData>
+      <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-60.0635588682586,-3.06239822861922 -60.0636760810962,-3.06242982043639 -60.063701766465,-3.06243189799794 -60.0637452707185,-3.06242890472213 -60.0637621460973,-3.06242670524486 -60.0637804454786,-3.0624235452651 -60.0638065846902,-3.062417972017 -60.0638272534351,-3.06241193697399 -60.063840796628,-3.06240831244312 -60.0638695362712,-3.06239771267437 -60.0638921758251,-3.06238824460893 -60.0639328641861,-3.06236743675243 -60.0639581193338,-3.06235075183568 -60.0639726001082,-3.06233541232922 -60.0639844202689,-3.06231147625465 -60.0639915184539,-3.06225722583001 -60.064043480558,-3.06049462405035 -60.0634524451506,-3.06048554623464 -60.0634490397863,-3.06064695800629 -60.0634437105974,-3.06078470854245 -60.0634393227508,-3.060898121221 -60.0634348665121,-3.06101115498173 -60.0634302843378,-3.06112432982799 -60.063425788398,-3.0612353658869 -60.0634160897155,-3.06146220667064 -60.0634111728051,-3.06157395176231 -60.0634062271456,-3.0616863570292 -60.0634012284798,-3.06179996236821 -60.0633962837554,-3.06191299886913 -60.0633914344051,-3.06202633922493 -60.0635717118944,-3.06203397113996 -60.0635588682586,-3.06239822861922</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
+  </Placemark>
+  <Placemark id="AREA_03_PLANALTO.2">
+	<name>Área 03 · Planalto (Ponto)</name>
+	<ExtendedData><SchemaData schemaUrl="#AREA_03_PLANALTO">
+		<SimpleData name="AREA_ID">AREA_03</SimpleData>
+		<SimpleData name="NOME">Área 03</SimpleData>
+		<SimpleData name="EMPREEND">Escola Urbana de 10 salas</SimpleData>
+		<SimpleData name="BAIRRO">Planalto</SimpleData>
+		<SimpleData name="ENDERECO">Rua Camila, S/N</SimpleData>
+		<SimpleData name="CEP">69044-232</SimpleData>
+		<SimpleData name="TIPO">Ponto</SimpleData>
+	</SchemaData></ExtendedData>
+      <Point><coordinates>-60.0637535950145,-3.06129347148468</coordinates></Point>
+  </Placemark>
+</Folder>
+</Document></kml>
