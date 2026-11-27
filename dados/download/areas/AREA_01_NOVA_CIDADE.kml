@@ -25,6 +25,7 @@
 		<SimpleData name="ENDERECO">Acesso pela Rua Saracura Mira, S/N</SimpleData>
 		<SimpleData name="CEP">69017-350</SimpleData>
 		<SimpleData name="AREA_RTM_M2">22500</SimpleData>
+		<SimpleData name="MATRICULA_RI">2.339 · 5º Ofício de Registro de Imóveis</SimpleData>
 		<SimpleData name="TIPO">Polígono</SimpleData>
 	</SchemaData></ExtendedData>
       <MultiGeometry><Polygon><outerBoundaryIs><LinearRing><coordinates>-59.9753390714189,-2.98564870328136 -59.9740108848771,-2.98588773297029 -59.9742486409784,-2.98722303150317 -59.9755768290777,-2.98698400154468 -59.9753390714189,-2.98564870328136</coordinates></LinearRing></outerBoundaryIs></Polygon></MultiGeometry>
