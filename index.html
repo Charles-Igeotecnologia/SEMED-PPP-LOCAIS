@@ -1363,7 +1363,7 @@ function renderReport(){
     const F={H,k:k/cosl,t:([x,y])=>[((x-X0)*k).toFixed(1),((Y1-y)*k).toFixed(1)]};
     const C=2*Math.PI*RM;let z=Math.min(19,Math.floor(Math.log2(C*1800/(256*w))));const ts=C/2**z;
     const tx0=Math.floor((X0+C/2)/ts),tx1=Math.floor((X0+w+C/2)/ts),ty0=Math.floor((C/2-Y1)/ts),ty1=Math.floor((C/2-(Y1-h))/ts);
-    let tiles='',ref='';const tpx=(ts*k).toFixed(2);
+    let tiles='',ref='';const tpx=(ts*k+0.8).toFixed(2);
     for(let tx=tx0;tx<=tx1;tx++)for(let ty=ty0;ty<=ty1;ty++){const px=((tx*ts-C/2-X0)*k).toFixed(1),py=((Y1-(C/2-ty*ts))*k).toFixed(1);
       tiles+=`<image href="${ESRI_T}World_Imagery/MapServer/tile/${z}/${ty}/${tx}" x="${px}" y="${py}" width="${tpx}" height="${tpx}" preserveAspectRatio="none"/>`;
       ref+=`<image href="${ESRI_T}Reference/World_Transportation/MapServer/tile/${z}/${ty}/${tx}" x="${px}" y="${py}" width="${tpx}" height="${tpx}" preserveAspectRatio="none"/>`}
